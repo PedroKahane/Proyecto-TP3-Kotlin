@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Proyecto-TP3-Kotlin</string>
+    <string name="nombre">Nombre</string>
+    <string name="telefono">Telefono</string>
 </resources>
