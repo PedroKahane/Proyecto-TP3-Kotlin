@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login_activity.LoginActivity">
+    tools:context=".ui.views.LoginActivity">
 
     <ImageView
         android:id="@+id/imagen_login_perro"
