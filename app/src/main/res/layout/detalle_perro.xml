@@ -49,12 +49,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="@string/nombre"
-                        android:textSize="24sp" />
+                        android:textColor="@color/darker_grey"
+                        android:textFontWeight="600"
+                        android:textSize="24sp"
+                        android:textStyle="normal"
+                        app:fontFamily="@font/poppins_font_family" /> />
 
                     <LinearLayout
                         android:layout_width="129dp"
-                        android:layout_height="26dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -70,7 +74,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ubicacion"
-                            android:textSize="20sp" />
+                            android:textColor="@color/darker_grey"
+                            android:textFontWeight="400"
+                            android:textSize="18sp"
+                            android:textStyle="normal"
+                            app:fontFamily="@font/poppins_font_family" />/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -79,8 +87,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="45dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginBottom="7dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -90,7 +98,11 @@
                         android:layout_weight="1"
                         android:text="@string/edad"
                         android:textAlignment="center"
-                        android:textSize="18sp" />
+                        android:textColor="@color/darker_grey"
+                        android:textFontWeight="500"
+                        android:textSize="22sp"
+                        android:textStyle="normal"
+                        app:fontFamily="@font/poppins_font_family" />
 
                     <TextView
                         android:id="@+id/EdadNumero"
@@ -98,7 +110,11 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="19"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textFontWeight="500"
+                        android:textSize="22sp"
+                        android:textStyle="normal"
+                        app:fontFamily="@font/poppins_font_family" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -127,7 +143,11 @@
                         android:layout_height="wrap_content"
                         android:text="Male"
                         android:textAlignment="center"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/colorPrimary"
+                        android:textFontWeight="500"
+                        android:textSize="14sp"
+                        android:textStyle="normal"
+                        app:fontFamily="@font/poppins_font_family" />
 
                     <TextView
                         android:id="@+id/Sex"
@@ -135,7 +155,11 @@
                         android:layout_height="wrap_content"
                         android:text="@string/sex"
                         android:textAlignment="center"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/colorPrimary"
+                        android:textFontWeight="400"
+                        android:textSize="12sp"
+                        android:textStyle="normal"
+                        app:fontFamily="@font/poppins_font_family" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -151,7 +175,11 @@
                         android:layout_height="wrap_content"
                         android:text="2Kg"
                         android:textAlignment="center"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/colorPrimary"
+                        android:textFontWeight="500"
+                        android:textSize="14sp"
+                        android:textStyle="normal"
+                        app:fontFamily="@font/poppins_font_family"/>
 
                     <TextView
                         android:id="@+id/Peso"
@@ -159,7 +187,11 @@
                         android:layout_height="wrap_content"
                         android:text="@string/peso"
                         android:textAlignment="center"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/colorPrimary"
+                        android:textFontWeight="400"
+                        android:textSize="12sp"
+                        android:textStyle="normal"
+                        app:fontFamily="@font/poppins_font_family"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -194,7 +226,10 @@
                         android:layout_height="wrap_content"
                         android:text="@string/dueño"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
+                        android:textSize="12sp"
+                        android:textFontWeight="400"
+                        android:textStyle="normal"
+                        app:fontFamily="@font/poppins_font_family"/>
 
                     <TextView
                         android:id="@+id/NombreDelDueño"
@@ -202,7 +237,10 @@
                         android:layout_height="wrap_content"
                         android:text="@string/descipcionDueño"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="18sp" />
+                        android:textSize="14sp"
+                        android:textFontWeight="500"
+                        android:textStyle="normal"
+                        app:fontFamily="@font/poppins_font_family"/>
                 </LinearLayout>
 
                 <ImageButton
@@ -226,7 +264,10 @@
                 android:background="@color/colorPrimary"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="@string/adoptar"
-                android:textSize="20sp"
+                android:textFontWeight="600"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                app:fontFamily="@font/poppins_font_family"
                 app:cornerRadius="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -3,6 +3,7 @@
     <style name="Base.Theme.ProyectoTP3Kotlin" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:fontFamily">@font/poppins_font_family</item>
     </style>
 
     <style name="Theme.ProyectoTP3Kotlin" parent="Base.Theme.ProyectoTP3Kotlin" />
