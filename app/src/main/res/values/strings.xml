@@ -7,6 +7,11 @@
     <string name="peso">Peso</string>
     <string name="dueño">Dueño</string>
     <string name="adoptar">Adoptar</string>
+    <string name="descripcionPerro">Imagen del perro</string>
+    <string name="descipcionUbicacion">Simbolo ubicacion</string>
+    <string name="descipcionDueño">Nombre del Dueño</string>
+    <string name="descripcionTelefono">Boton para llamar al telefono</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
