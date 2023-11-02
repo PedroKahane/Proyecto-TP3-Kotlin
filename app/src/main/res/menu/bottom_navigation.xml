@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragment_home"
+        android:title="Home"
+        android:icon="@drawable/baseline_home_24"/>
+
+    <item
+        android:id="@+id/fragment_favoritos"
+        android:title="Favoritos"
+        android:icon="@drawable/baseline_favorite_border_24"/>
+
+    <item
+        android:id="@+id/fragment_adopcion"
+        android:title="Adopcion"
+        android:icon="@drawable/baseline_adopcion_24"/>
+
+    <item
+        android:id="@+id/fragment_publicacion"
+        android:title="Publicacion"
+        android:icon="@drawable/baseline_publicar_24"/>
+</menu>
