@@ -41,7 +41,7 @@
                 android:id="@+id/edad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Edad"
+                android:text="@string/edad"
                 android:textSize="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -62,7 +62,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="45dp"
-                android:text="sex"
+                android:text="@string/sex"
+                android:textColor="@color/colorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Ubicacion" />
 
@@ -72,7 +73,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="45dp"
                 android:layout_marginTop="45dp"
-                android:text="peso"
+                android:text="@string/peso"
+                android:textColor="@color/colorPrimary"
                 app:layout_constraintStart_toEndOf="@+id/sex"
                 app:layout_constraintTop_toBottomOf="@+id/Ubicacion" />
 
@@ -82,6 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:text="Male"
+                android:textColor="@color/colorPrimary"
                 app:layout_constraintBottom_toTopOf="@+id/sex"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -91,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="30dp"
-                android:text="dueño"
+                android:text="@string/dueño"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toBottomOf="@+id/peso" />
 
@@ -101,6 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="45dp"
                 android:text="2kg"
+                android:textColor="@color/colorPrimary"
                 app:layout_constraintBottom_toTopOf="@+id/peso"
                 app:layout_constraintStart_toEndOf="@+id/Male" />
 
@@ -109,7 +113,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:height="70dp"
-                android:text="Adoptar"
+                android:background="@color/colorPrimary"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/adoptar"
                 android:textSize="20dp"
                 app:cornerRadius="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
