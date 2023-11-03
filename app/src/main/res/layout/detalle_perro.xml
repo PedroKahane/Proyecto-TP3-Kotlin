@@ -53,7 +53,7 @@
                         android:textFontWeight="600"
                         android:textSize="24sp"
                         android:textStyle="normal"
-                        app:fontFamily="@font/poppins_font_family" /> />
+                        app:fontFamily="@font/poppins_font_family" />
 
                     <LinearLayout
                         android:layout_width="129dp"
@@ -67,7 +67,7 @@
                             android:layout_height="25dp"
                             android:layout_weight="1"
                             android:contentDescription="@string/descipcionUbicacion"
-                            app:srcCompat="@drawable/ubicacion" />
+                            app:srcCompat="@drawable/ubicacion"/>
 
                         <TextView
                             android:id="@+id/Ubicacion"
@@ -78,7 +78,7 @@
                             android:textFontWeight="400"
                             android:textSize="18sp"
                             android:textStyle="normal"
-                            app:fontFamily="@font/poppins_font_family" />/>
+                            app:fontFamily="@font/poppins_font_family" />
                     </LinearLayout>
 
                 </LinearLayout>

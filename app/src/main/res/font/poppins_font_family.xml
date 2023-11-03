@@ -3,15 +3,15 @@
     <font
         app:fontStyle="normal"
         app:fontWeight="400"
-        app:font="@font/PoppinsRegular" />
+        app:font="@font/poppins_regular" />
 
     <font
         app:fontStyle="normal"
         app:fontWeight="500"
-        app:font="@font/PoppinsMedium" />
+        app:font="@font/poppins_medium" />
 
     <font
         app:fontStyle="normal"
         app:fontWeight="600"
-        app:font="@font/PoppinsSemiBold" />
+        app:font="@font/poppins_semi_bold" />
 </font-family>
