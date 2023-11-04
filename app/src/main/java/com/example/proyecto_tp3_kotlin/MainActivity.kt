@@ -1,11 +1,9 @@
-package com.example.proyecto_tp3_kotlin.ui.views
+package com.example.proyecto_tp3_kotlin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
-import com.example.proyecto_tp3_kotlin.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
