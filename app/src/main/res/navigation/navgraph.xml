@@ -25,4 +25,15 @@
         android:name="com.example.proyecto_tp3_kotlin.ui.fragments.PublicacionFragment"
         android:label="PublicacionFragment"
         tools:layout="@layout/fragment_publicacion"/>
+
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.example.proyecto_tp3_kotlin.ui.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/settings"
+        android:name="com.example.proyecto_tp3_kotlin.settingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
 </navigation>
