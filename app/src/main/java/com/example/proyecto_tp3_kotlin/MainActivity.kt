@@ -1,4 +1,4 @@
-package com.example.proyecto_tp3_kotlin.ui.views
+package com.example.proyecto_tp3_kotlin
 
 
 import android.content.res.Configuration
@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
-import com.example.proyecto_tp3_kotlin.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 

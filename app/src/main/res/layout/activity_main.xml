@@ -5,7 +5,7 @@
     android:id="@+id/viewContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.views.MainActivity"
+    tools:context=".ui.views."
     tools:openDrawer="start">
 
     <include
