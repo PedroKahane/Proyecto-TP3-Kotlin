@@ -13,5 +13,5 @@ object ActivityServiceBuilder {
 
     fun create(): DoggApi {
         return retrofit.create(DoggApi::class.java)
-}
+    }
 }
