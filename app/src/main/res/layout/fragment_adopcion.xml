@@ -18,11 +18,6 @@
             android:layout_height="wrap_content"
             android:text="adopcion" />
 
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="match_parent"
-            android:layout_height="418dp"
-            android:src="@drawable/imagen_login_perro" />
     </LinearLayout>
 
 </FrameLayout>
