@@ -13,5 +13,8 @@ class DogRepository @Inject constructor(private val dogDao: DogDao) {
     suspend fun addDog(dog: DogModel){
         dogDao.addDog(dog)
     }
+    suspend fun getDog(id: Long){
+        dogDao.getDetails(id)
+    }
 
 }

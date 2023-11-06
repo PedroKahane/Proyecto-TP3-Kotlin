@@ -16,4 +16,7 @@ interface DogDao {
 
     @Query("Select * from Dog_table order by Id asc")
     fun readAllDate():LiveData<List<DogModel>>
+
+    @Query("Select * from Dog_table WHERE Id = :id")
+    fun getDetails(id: Long):LiveData<List<DogModel>>
 }
