@@ -50,27 +50,20 @@ class DogService @Inject constructor(
             }
         }
     }
-    suspend fun getBreedImage(breed: String): String? {
+
+    suspend fun getImage(breed: String, subBreed: String): String {
         val service = ActivityServiceBuilder.create()
         return withContext(Dispatchers.IO) {
-            val response = service.getBreedDogImage(breed)
-
-            if (response.status == "success") {
-                response.message.toString()
-            } else {
-                null
+            var response = service.getBreedDogImage(breed)
+            if(subBreed != null){
+                response = service.getSubBreedDogImage(breed, subBreed)
             }
-        }
-    }
-    suspend fun getSubBreedImage(breed: String, subBreed: String): String? {
-        val service = ActivityServiceBuilder.create()
-        return withContext(Dispatchers.IO) {
-            val response = service.getSubBreedDogImage(breed, subBreed)
+
 
             if (response.status == "success") {
                 response.message.toString()
             } else {
-                null
+                "https://images.dog.ceo/breeds/schnauzer-miniature/n02097047_6434.jpg"
             }
         }
     }

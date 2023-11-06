@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.proyecto_tp3_kotlin.R
 import com.example.proyecto_tp3_kotlin.service.DogRepositoryApi
 import com.example.proyecto_tp3_kotlin.service.DogService
@@ -36,8 +38,6 @@ class AdopcionFragment : Fragment() {
         adopcionText = view.findViewById(R.id.adopcionText)
 
         adopcionText.text = "Cambie el texto"
-        //println("Debug")
-
         viewLifecycleOwner.lifecycleScope.launch {
             loadDog()
             val subrazaKelpie = subBreeds["australian"]?.get(0)
@@ -47,24 +47,24 @@ class AdopcionFragment : Fragment() {
         }
         return view
     }
+
     suspend fun loadDog() {
         remote = DogService()
         dogRepository = DogRepositoryApi(remote)
-        //Log.d("Debug", "loadDog() called")
 
         try {
             breeds = dogRepository.getAvailableBreeds()
             subBreeds = dogRepository.getAvailableSubBreeds()
 
 
+            /*
+            breeds.forEach { breed ->
+                println("Raza: $breed")
+            }
 
-                        breeds.forEach { breed ->
-                            println("Raza: $breed")
-                        }
-
-                        subBreeds.forEach { (breed, subBreedsList) ->
-                            println("Raza: $breed - Subrazas: $subBreedsList")
-                        }
+            subBreeds.forEach { (breed, subBreedsList) ->
+                println("Raza: $breed - Subrazas: $subBreedsList")
+            }*/
 
             //val subrazaKelpie = availableSubBreeds["australian"]?.get(0)
             //texto.text = subrazaKelpie

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".ui.fragments.PublicacionFragment"
         android:background="@color/white"
         >
@@ -29,36 +28,18 @@
 
 
         <EditText
-            android:id="@+id/Image"
-            android:hint="Image"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:background="@drawable/custom_input"
+            android:id="@+id/DogName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/publicacion"
-            android:layout_marginTop="40dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            />
-
-        <EditText
-            android:id="@+id/DogName"
+            android:background="@drawable/custom_input"
             android:hint="Name"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:background="@drawable/custom_input"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/Image"
-            android:layout_marginTop="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/publicacion" />
 
         <EditText
             android:id="@+id/DogAge"

@@ -1,6 +1,7 @@
 package com.example.proyecto_tp3_kotlin.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,17 +9,22 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.proyecto_tp3_kotlin.R
 import com.example.proyecto_tp3_kotlin.model.DogModel
 import com.example.proyecto_tp3_kotlin.model.DogViewModel
+import com.example.proyecto_tp3_kotlin.service.DogRepositoryApi
+import com.example.proyecto_tp3_kotlin.service.DogService
+import kotlinx.coroutines.launch
+
+
+class PublicacionFragment : Fragment(
+
+) {
 
 
 
-class PublicacionFragment : Fragment() {
 
-
-
-    lateinit var imagen : EditText
     lateinit var dogName : EditText
     lateinit var dogAge : EditText
     lateinit var dogGender : EditText
@@ -26,8 +32,10 @@ class PublicacionFragment : Fragment() {
     lateinit var dogBreed : EditText
     lateinit var dogSubBreed : EditText
     lateinit var ownerDetails : EditText
-
+    private lateinit var remote: DogService
+    private lateinit var dogRepository: DogRepositoryApi
     lateinit var publicarBoton : Button
+    private lateinit var breeds: List<String>
 
     var i : Int = 0
 
@@ -41,7 +49,7 @@ class PublicacionFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_publicacion, container, false)
 
 
-        imagen = view.findViewById(R.id.Image)
+
         dogName = view.findViewById(R.id.DogName)
         dogAge =view.findViewById(R.id.DogAge)
         dogGender = view.findViewById(R.id.DogGender)
@@ -54,16 +62,21 @@ class PublicacionFragment : Fragment() {
 
         dogViewModel = ViewModelProvider(this).get(DogViewModel::class.java)
 
+
         view.findViewById<Button>(R.id.publicarBoton).setOnClickListener(){
-            insertDataToDatabase()
+            viewLifecycleOwner.lifecycleScope.launch {
+                insertDataToDatabase()
+            }
         }
 
         return view
     }
 
-    fun insertDataToDatabase(){
+    suspend fun insertDataToDatabase(){
+        remote = DogService()
+        dogRepository = DogRepositoryApi(remote)
 
-        val imagen = imagen.text.toString()
+
         val subBreed = dogSubBreed.text.toString()
         val breed = dogBreed.text.toString()
         val name = dogName.text.toString()
@@ -71,12 +84,28 @@ class PublicacionFragment : Fragment() {
         val gender = dogGender.text.toString()
         val weight = dogWeight.text.toString()
         val owner = ownerDetails.text.toString()
+        val imagen = dogRepository.getImage(breed, subBreed)
+
+
 
 
         val dog = DogModel(i, imagen, name, Integer.parseInt(age), gender, Integer.parseInt(weight), breed, subBreed, owner,  "Argentina")
         dogViewModel.addDog(dog)
 
         i += 1
+    }
+    suspend fun loadBreeds() {
+        remote = DogService()
+        dogRepository = DogRepositoryApi(remote)
+
+        try {
+            breeds = dogRepository.getAvailableBreeds()
+
+
+        } catch (e: Exception) {
+            // Manejar excepción aquí
+            Log.e("Example", e.stackTraceToString())
+        }
     }
 
 }
