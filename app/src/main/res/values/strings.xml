@@ -1,15 +1,14 @@
 <resources>
     <string name="app_name">Proyecto-TP3-Kotlin</string>
-    <string name="nombre">Nombre</string>
     <string name="telefono">Telefono</string>
     <string name="edad">Edad</string>
     <string name="sex">Sex</string>
+    <string name="nombre">Nombre</string>
     <string name="peso">Peso</string>
     <string name="dueño">Dueño</string>
     <string name="adoptar">Adoptar</string>
     <string name="descripcionPerro">Imagen del perro</string>
     <string name="descipcionUbicacion">Simbolo ubicacion</string>
-    <string name="descipcionDueño">Nombre del Dueño</string>
     <string name="descripcionTelefono">Boton para llamar al telefono</string>
     <string name="navigation_drawer_open">"Abrir"</string>
     <string name="navigation_drawer_close">"Cerrar"</string>

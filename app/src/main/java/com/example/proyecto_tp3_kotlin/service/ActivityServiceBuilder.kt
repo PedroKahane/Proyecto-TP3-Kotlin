@@ -11,7 +11,7 @@ object ActivityServiceBuilder {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    fun create(): DoggApi {
-        return retrofit.create(DoggApi::class.java)
+    fun create(): DogApi {
+        return retrofit.create(DogApi::class.java)
     }
 }

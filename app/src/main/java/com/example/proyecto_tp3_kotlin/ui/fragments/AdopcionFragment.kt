@@ -1,60 +1,79 @@
 package com.example.proyecto_tp3_kotlin.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
 import com.example.proyecto_tp3_kotlin.R
+import com.example.proyecto_tp3_kotlin.service.DogRepositoryApi
+import com.example.proyecto_tp3_kotlin.service.DogService
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AdopcionFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AdopcionFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var adopcionText : TextView
+    private lateinit var remote: DogService
+    private lateinit var dogRepository: DogRepositoryApi
+    private lateinit var breeds: List<String>
+    private lateinit var subBreeds: Map<String, List<String>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_adopcion, container, false)
-    }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AdopcionFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AdopcionFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        val view = inflater.inflate(R.layout.fragment_adopcion, container, false)
+        adopcionText = view.findViewById(R.id.adopcionText)
+
+        adopcionText.text = "Cambie el texto"
+        //println("Debug")
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            loadDog()
+            val subrazaKelpie = subBreeds["australian"]?.get(0)
+            adopcionText.text = subrazaKelpie
+            println(subBreeds)
+            println(breeds)
+        }
+        return view
+    }
+    suspend fun loadDog() {
+        remote = DogService()
+        dogRepository = DogRepositoryApi(remote)
+        //Log.d("Debug", "loadDog() called")
+
+        try {
+            breeds = dogRepository.getAvailableBreeds()
+            subBreeds = dogRepository.getAvailableSubBreeds()
+
+
+
+                        breeds.forEach { breed ->
+                            println("Raza: $breed")
+                        }
+
+                        subBreeds.forEach { (breed, subBreedsList) ->
+                            println("Raza: $breed - Subrazas: $subBreedsList")
+                        }
+
+            //val subrazaKelpie = availableSubBreeds["australian"]?.get(0)
+            //texto.text = subrazaKelpie
+
+
+        } catch (e: Exception) {
+            // Manejar excepción aquí
+            Log.e("Example", e.stackTraceToString())
+        }
     }
 }
