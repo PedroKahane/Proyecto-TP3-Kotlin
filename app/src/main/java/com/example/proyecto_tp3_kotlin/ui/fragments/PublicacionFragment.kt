@@ -4,58 +4,79 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.proyecto_tp3_kotlin.R
+import com.example.proyecto_tp3_kotlin.model.DogModel
+import com.example.proyecto_tp3_kotlin.model.DogViewModel
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PublicacionFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 
 class PublicacionFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+
+
+    lateinit var imagen : EditText
+    lateinit var dogName : EditText
+    lateinit var dogAge : EditText
+    lateinit var dogGender : EditText
+    lateinit var dogWeight : EditText
+    lateinit var dogBreed : EditText
+    lateinit var dogSubBreed : EditText
+    lateinit var ownerDetails : EditText
+
+    lateinit var publicarBoton : Button
+
+    var i : Int = 0
+
+    private lateinit var dogViewModel : DogViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_publicacion, container, false)
+        val view = inflater.inflate(R.layout.fragment_publicacion, container, false)
+
+
+        imagen = view.findViewById(R.id.Image)
+        dogName = view.findViewById(R.id.DogName)
+        dogAge =view.findViewById(R.id.DogAge)
+        dogGender = view.findViewById(R.id.DogGender)
+        dogWeight = view.findViewById(R.id.DogWeight)
+        dogBreed = view.findViewById(R.id.DogBreed)
+        dogSubBreed = view.findViewById(R.id.DogSubBreed)
+        ownerDetails = view.findViewById(R.id.OwnerDetails)
+
+        publicarBoton = view.findViewById(R.id.publicarBoton)
+
+        dogViewModel = ViewModelProvider(this).get(DogViewModel::class.java)
+
+        view.findViewById<Button>(R.id.publicarBoton).setOnClickListener(){
+            insertDataToDatabase()
+        }
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PublicacionFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PublicacionFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    fun insertDataToDatabase(){
+
+        val imagen = imagen.text.toString()
+        val subBreed = dogSubBreed.text.toString()
+        val breed = dogBreed.text.toString()
+        val name = dogName.text.toString()
+        val age = dogAge.text.toString()
+        val gender = dogGender.text.toString()
+        val weight = dogWeight.text.toString()
+        val owner = ownerDetails.text.toString()
+
+
+        val dog = DogModel(i, imagen, name, Integer.parseInt(age), gender, Integer.parseInt(weight), breed, subBreed, owner,  "Argentina")
+        dogViewModel.addDog(dog)
+
+        i += 1
     }
+
 }
