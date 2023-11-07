@@ -57,7 +57,7 @@
             android:layout_marginEnd="20dp"
             />
 
-        <EditText
+        <Spinner
             android:id="@+id/DogGender"
             android:hint="Sex"
             android:paddingStart="10dp"

@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -31,7 +32,7 @@ class PublicacionFragment : Fragment(
 
     lateinit var dogName : EditText
     lateinit var dogAge : EditText
-    lateinit var dogGender : EditText
+    lateinit var dogGender : Spinner
     lateinit var dogWeight : EditText
     lateinit var dogBreed : Spinner
     lateinit var dogSubBreed : Spinner
@@ -71,14 +72,23 @@ class PublicacionFragment : Fragment(
 
         publicarBoton = view.findViewById(R.id.publicarBoton)
 
+        val data = listOf("Hembra", "Macho")
+        val genderAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, data)
+
+        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        dogGender.adapter = genderAdapter
+
         dogViewModel = ViewModelProvider(this).get(DogViewModel::class.java)
         viewLifecycleOwner.lifecycleScope.launch {
             loadBreeds()
 
         }
-        view.findViewById<Button>(R.id.publicarBoton).setOnClickListener(){
-            viewLifecycleOwner.lifecycleScope.launch {
-                insertDataToDatabase()
+        view.findViewById<Button>(R.id.publicarBoton).setOnClickListener() {
+            if(validateInputData(dogName.text.toString(), dogAge.text.toString(), dogWeight.text.toString(), ownerDetails.text.toString())) {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    insertDataToDatabase()
+                }
             }
         }
 
@@ -95,11 +105,11 @@ class PublicacionFragment : Fragment(
         val breed = selectedItemSpinner
         val name = dogName.text.toString()
         val age = dogAge.text.toString()
-        val gender = dogGender.text.toString()
+        val gender = dogGender.selectedItem.toString()
         val weight = dogWeight.text.toString()
         val owner = ownerDetails.text.toString()
 
-
+        println(gender)
         println(breed)
         println(selectedItemSpinnerSubBreed)
         val subBreed = selectedItemSpinnerSubBreed
@@ -174,5 +184,44 @@ class PublicacionFragment : Fragment(
             Log.e("Example", e.stackTraceToString())
         }
     }
+    private fun validateInputData(name: String, age: String, weight: String, details: String): Boolean{
+        val regex = Regex("^[0-9]*\$")
+        if (!regex.matches(age)) {
+            displayToast("La edad debe ser un numero!")
+            return false
+        }
+
+        if (!regex.matches(weight)) {
+            displayToast("El peso debe ser un numero!")
+            return false
+        }
+
+
+        if (name.isEmpty()) {
+            displayToast("Ingrese nombre, por favor!")
+            return false
+        }
+
+        if (details.isEmpty()) {
+            displayToast("Ingrese el detalle, por favor!")
+            return false
+        }
+
+        if (age.isEmpty()) {
+            displayToast("Ingrese la edad, por favor!")
+            return false
+        }
+
+        if (weight.isEmpty()) {
+            displayToast("Ingrese el peso, por favor!")
+            return false
+        }
+
+        return true
+    }
+    private fun displayToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+    }
+
 
 }
