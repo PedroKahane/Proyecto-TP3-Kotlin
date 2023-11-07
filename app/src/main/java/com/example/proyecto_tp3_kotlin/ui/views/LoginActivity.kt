@@ -28,10 +28,7 @@ class LoginActivity : AppCompatActivity() {
             }else{
                 validate()
             }
-
-
         }
-
     }
 
     private fun validarNombre() : Boolean {
