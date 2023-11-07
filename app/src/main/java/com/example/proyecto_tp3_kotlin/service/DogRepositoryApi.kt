@@ -18,9 +18,12 @@ class DogRepositoryApi @Inject constructor(
     suspend fun getAvailableSubBreeds(): Map<String, List<String>> {
         return remote.getSubBreeds()
     }
-
     suspend fun getImage(breed: String, subBreed: String): String {
         return remote.getImage(breed, subBreed)
+
+    }
+    suspend fun getRandomBreed(): String {
+        return remote.getRandomBreed()
 
     }
 }

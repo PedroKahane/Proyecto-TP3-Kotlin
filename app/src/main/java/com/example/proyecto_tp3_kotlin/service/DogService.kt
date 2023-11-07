@@ -30,6 +30,20 @@ class DogService @Inject constructor(
             }
         }
     }
+    suspend fun getRandomBreed(): String {
+        val service = ActivityServiceBuilder.create()
+        return withContext(Dispatchers.IO) {
+            val response = service.getRandomBreed()
+
+            if (response.status == "success") {
+                val breed = response.message.toString()
+
+                breed
+            } else {
+                "maltese"
+            }
+        }
+    }
     suspend fun getSubBreeds(): Map<String, List<String>> {
         val service = ActivityServiceBuilder.create()
         return withContext(Dispatchers.IO) {
