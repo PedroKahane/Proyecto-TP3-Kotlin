@@ -1,6 +1,5 @@
 package com.example.proyecto_tp3_kotlin
 
-
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,8 +12,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.proyecto_tp3_kotlin.adapter.DogAdapter
+import com.example.proyecto_tp3_kotlin.databinding.ActivityMainBinding
+import com.example.proyecto_tp3_kotlin.model.DogProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,11 +27,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var drawer: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        initRecyclerView()
 
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -58,6 +64,13 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(bottomNavView, navController)
         NavigationUI.setupWithNavController(navigationView, navController)
     }
+
+    private fun initRecyclerView(){
+        binding.recyclerDog.layoutManager = LinearLayoutManager(this)
+        binding.recyclerDog.adapter = DogAdapter(DogProvider.dogList)
+
+    }
+
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
