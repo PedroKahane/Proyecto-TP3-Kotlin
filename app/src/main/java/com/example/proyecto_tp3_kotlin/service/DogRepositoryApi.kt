@@ -22,8 +22,9 @@ class DogRepositoryApi @Inject constructor(
         return remote.getImage(breed, subBreed)
 
     }
-    suspend fun getRandomBreed(): String {
-        return remote.getRandomBreed()
+    suspend fun getImageBreed(breed: String): String {
+        return remote.getImageBreed(breed)
 
     }
+
 }

@@ -30,20 +30,7 @@ class DogService @Inject constructor(
             }
         }
     }
-    suspend fun getRandomBreed(): String {
-        val service = ActivityServiceBuilder.create()
-        return withContext(Dispatchers.IO) {
-            val response = service.getRandomBreed()
 
-            if (response.status == "success") {
-                val breed = response.message.toString()
-
-                breed
-            } else {
-                "maltese"
-            }
-        }
-    }
     suspend fun getSubBreeds(): Map<String, List<String>> {
         val service = ActivityServiceBuilder.create()
         return withContext(Dispatchers.IO) {
@@ -69,9 +56,25 @@ class DogService @Inject constructor(
         val service = ActivityServiceBuilder.create()
         return withContext(Dispatchers.IO) {
             var response = service.getBreedDogImage(breed)
-            if(subBreed != null){
-                response = service.getSubBreedDogImage(breed, subBreed)
+
+            response = service.getSubBreedDogImage(breed, subBreed)
+
+
+
+            if (response.status == "success") {
+                response.message.toString()
+            } else {
+                "https://images.dog.ceo/breeds/schnauzer-miniature/n02097047_6434.jpg"
             }
+        }
+    }
+    suspend fun getImageBreed(breed: String): String {
+        val service = ActivityServiceBuilder.create()
+        return withContext(Dispatchers.IO) {
+            var response = service.getBreedDogImage(breed)
+
+            response = service.getBreedDogImage(breed)
+
 
 
             if (response.status == "success") {
