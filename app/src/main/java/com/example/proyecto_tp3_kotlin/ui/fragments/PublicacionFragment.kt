@@ -72,7 +72,7 @@ class PublicacionFragment : Fragment(
 
         publicarBoton = view.findViewById(R.id.publicarBoton)
 
-        val data = listOf("Hembra", "Macho")
+        val data = listOf("Seleccionar sexo","Hembra", "Macho")
         val genderAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, data)
 
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -85,9 +85,10 @@ class PublicacionFragment : Fragment(
 
         }
         view.findViewById<Button>(R.id.publicarBoton).setOnClickListener() {
-            if(validateInputData(dogName.text.toString(), dogAge.text.toString(), dogWeight.text.toString(), ownerDetails.text.toString())) {
+            if(validateInputData(dogBreed.selectedItem.toString(),selectedItemSpinnerSubBreed,dogGender.selectedItem.toString(),dogName.text.toString(), dogAge.text.toString(), dogWeight.text.toString(), ownerDetails.text.toString())) {
                 viewLifecycleOwner.lifecycleScope.launch {
                     insertDataToDatabase()
+
                 }
             }
         }
@@ -125,6 +126,7 @@ class PublicacionFragment : Fragment(
         val dog = DogModel(i, imagen, name, Integer.parseInt(age), gender, Integer.parseInt(weight), breed, subBreed, owner,  "Argentina")
         dogViewModel.addDog(dog)
 
+
         i += 1
     }
     suspend fun loadBreeds() {
@@ -134,7 +136,10 @@ class PublicacionFragment : Fragment(
         try {
             breeds = dogRepository.getAvailableBreeds()
             subBreeds = dogRepository.getAvailableSubBreeds()
-            val adapterRaza = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, breeds)
+
+            val breedsConSeleccion = mutableListOf("Seleccionar Raza")
+            breedsConSeleccion.addAll(breeds)
+            val adapterRaza = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, breedsConSeleccion)
 
             adapterRaza.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
@@ -144,13 +149,17 @@ class PublicacionFragment : Fragment(
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
                     // Aquí puedes realizar acciones cuando se selecciona un elemento del Spinner
-                    val selectedRaza = breeds[position]
+                    val selectedRaza = breedsConSeleccion[position]
                     val subrazas = subBreeds[selectedRaza]
+
+
                     selectedItemSpinner = selectedRaza
 
                     if (subrazas != null && subrazas.isNotEmpty()) {
+                        val subBreedsConSeleccion = mutableListOf("Seleccionar Sub Raza")
+                        subBreedsConSeleccion.addAll(subrazas)
                         dogSubBreed.visibility = View.VISIBLE
-                        val adapterSubraza = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, subrazas)
+                        val adapterSubraza = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, subBreedsConSeleccion)
                         adapterSubraza.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                         dogSubBreed.adapter = adapterSubraza
                         dogSubBreed.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -184,7 +193,7 @@ class PublicacionFragment : Fragment(
             Log.e("Example", e.stackTraceToString())
         }
     }
-    private fun validateInputData(name: String, age: String, weight: String, details: String): Boolean{
+    private fun validateInputData(breed: String,subBreed: String,gender: String,name: String, age: String, weight: String, details: String): Boolean{
         val regex = Regex("^[0-9]*\$")
         if (!regex.matches(age)) {
             displayToast("La edad debe ser un numero!")
@@ -195,7 +204,19 @@ class PublicacionFragment : Fragment(
             displayToast("El peso debe ser un numero!")
             return false
         }
+        if (gender.equals("Seleccionar sexo")) {
+            displayToast("Debes seleccionar un sexo")
+            return false
+        }
 
+        if (breed.equals("Seleccionar Raza")) {
+            displayToast("Debes seleccionar una raza")
+            return false
+        }
+        if (subBreed.equals("Seleccionar Sub Raza")) {
+            displayToast("Debes seleccionar una sub raza")
+            return false
+        }
 
         if (name.isEmpty()) {
             displayToast("Ingrese nombre, por favor!")
@@ -216,7 +237,6 @@ class PublicacionFragment : Fragment(
             displayToast("Ingrese el peso, por favor!")
             return false
         }
-
         return true
     }
     private fun displayToast(message: String) {
