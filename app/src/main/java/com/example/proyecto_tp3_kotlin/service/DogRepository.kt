@@ -12,7 +12,7 @@ class DogRepository @Inject constructor(private val dogDao: DogDao) {
     val readAllData: LiveData<List<DogModel>> = dogDao.readAllDate()
 
     suspend fun addDog(dog: DogModel){
-        dogDao.addDog(dog)
+        dogDao.instertAll(dog)
         Log.d("MyTag", "Elemento insertado con ID: $dog")
     }
     suspend fun getDog(id: Long){

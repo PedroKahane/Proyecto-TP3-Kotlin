@@ -35,7 +35,7 @@ class AdopcionFragment : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_adopcion, container, false)
-        adopcionText = view.findViewById(R.id.adopcionText)
+       /* adopcionText = view.findViewById(R.id.adopcionText)
 
         adopcionText.text = "Cambie el textxxxxxxxxxxxxxo"
         viewLifecycleOwner.lifecycleScope.launch {
@@ -44,7 +44,7 @@ class AdopcionFragment : Fragment() {
             adopcionText.text = subrazaKelpie
             println(subBreeds)
             println(breeds)
-        }
+        }*/
         return view
     }
 

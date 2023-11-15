@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_tp3_kotlin.R
 
 class AdaptadorPerro(
-    var listaPerro: ArrayList<Perro>
+    var listaPerro: ArrayList<DogModel>
 ): RecyclerView.Adapter<AdaptadorPerro.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -25,7 +25,7 @@ class AdaptadorPerro(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val perro = listaPerro[position]
-        holder.brandNombre.text = perro.nombre
+        holder.brandNombre.text = perro.name
 
     }
 
@@ -33,7 +33,7 @@ class AdaptadorPerro(
         return listaPerro.size
     }
 
-    fun filtrar(listaFiltrada: ArrayList<Perro>){
+    fun filtrar(listaFiltrada: ArrayList<DogModel>){
         this.listaPerro = listaFiltrada
         notifyDataSetChanged()
     }

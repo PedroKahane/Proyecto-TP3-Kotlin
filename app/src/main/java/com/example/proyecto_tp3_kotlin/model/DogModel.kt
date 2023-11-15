@@ -6,53 +6,41 @@ import androidx.room.PrimaryKey
 
 
 @Entity(tableName = "Dog_table")
-class DogModel (id : Int, image : String,name : String, age: Int, gender: String, weight: Int, breed : String, subBreed : String, owner: String, ubication : String) {
-
-    @PrimaryKey
+class DogModel(
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    val id : Int
+    val id: Int = 0,
 
     @ColumnInfo(name = "image")
-    val image : String
+    val image: String,
 
     @ColumnInfo(name = "name")
-    val name: String
+    val name: String,
 
     @ColumnInfo(name = "age")
-    val age : Int
+    val age: Int,
 
     @ColumnInfo(name = "gender")
-    val gender : String
+    val gender: String,
 
     @ColumnInfo(name = "weight")
-    val weight : Int
+    val weight: Int,
 
     @ColumnInfo(name = "breed")
-    val breed : String
+    val breed: String,
 
     @ColumnInfo(name = "subBreed")
-    val subBreed: String
+    val subBreed: String,
 
     @ColumnInfo(name = "owner")
-    val owner : String
+    val owner: String,
 
     @ColumnInfo(name = "ubication")
-    val ubication : String
-
-    init{
-        this.id = id
-        this.image = image
-        this.name = name
-        this.age = age
-        this.gender = gender
-        this.weight = weight
-        this.breed = breed
-        this.subBreed = subBreed
-        this.owner = owner
-        this.ubication = ubication
-
+    val ubication: String
+){
+    override fun toString(): String {
+        return "DogModel(name=$name, breed=$breed, subBreed=$subBreed, owner=$owner, ...)"
     }
-
 }
 
 

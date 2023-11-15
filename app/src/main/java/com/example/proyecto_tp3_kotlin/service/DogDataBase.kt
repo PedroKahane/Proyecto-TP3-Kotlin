@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.proyecto_tp3_kotlin.model.DogModel
 
 
-@Database(entities = [DogModel:: class], version = 1, exportSchema = false)
+@Database(entities = [DogModel:: class], version = 3, exportSchema = false)
 abstract class DogDataBase: RoomDatabase() {
 
     abstract fun dogDao(): DogDao

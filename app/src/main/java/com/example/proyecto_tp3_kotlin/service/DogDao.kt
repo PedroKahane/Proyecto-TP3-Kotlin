@@ -11,8 +11,11 @@ import com.example.proyecto_tp3_kotlin.model.DogModel
 @Dao
 interface DogDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addDog(dog : DogModel)
+    @Query("SELECT * FROM Dog_table")
+    fun getAll(): List<DogModel>
+
+    @Insert
+    fun instertAll(vararg dog: DogModel)
 
     @Query("Select * from Dog_table order by Id asc")
     fun readAllDate():LiveData<List<DogModel>>

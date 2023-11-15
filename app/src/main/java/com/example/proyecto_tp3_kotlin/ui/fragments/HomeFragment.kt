@@ -7,21 +7,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.ui.text.toLowerCase
-import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.proyecto_tp3_kotlin.databinding.ActivityMainBinding
+import androidx.room.Room
 import com.example.proyecto_tp3_kotlin.databinding.FragmentHomeBinding
 import com.example.proyecto_tp3_kotlin.model.AdaptadorPerro
-import com.example.proyecto_tp3_kotlin.model.Perro
+import com.example.proyecto_tp3_kotlin.model.DogModel
+import com.example.proyecto_tp3_kotlin.service.DogDataBase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adaptador: AdaptadorPerro
 
-    var listaPerro = arrayListOf<Perro>()
+    var listaPerro = arrayListOf<DogModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,10 +34,9 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
 
-        llenarLista()
-        setupRecyclerView()
 
         binding.buscador.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -45,17 +46,39 @@ class HomeFragment : Fragment() {
             }
 
             override fun afterTextChanged(s: Editable?) {
+                lifecycleScope.launch {
+                    llenarLista()
+                }
+                setupRecyclerView()
                 filtrar(s.toString())
             }
 
         })
     }
 
-    fun llenarLista(){
-        listaPerro.add(Perro("pedro"))
-        listaPerro.add(Perro("santy"))
-        listaPerro.add(Perro("carlos"))
-        listaPerro.add(Perro("mati"))
+    suspend fun llenarLista() = withContext(Dispatchers.IO) {
+        val db = Room.databaseBuilder(
+            requireContext(),
+            DogDataBase::class.java, "dog-database"
+        ).build()
+
+        val dogdao = db.dogDao()
+
+        // Obtener la lista de perros después de la inserción
+        val perros: List<DogModel> = dogdao.getAll()
+
+        // Imprimir la lista de perros en la consola (puedes comentar o eliminar esta línea si no es necesario)
+        println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Lista de perros: $perros")
+
+        // Actualizar la lista en el hilo principal
+        withContext(Dispatchers.Main) {
+            listaPerro.clear()
+            listaPerro.addAll(perros)
+            adaptador.notifyDataSetChanged()
+        }
+
+        // Cerrar la base de datos
+        db.close()
     }
 
     private fun setupRecyclerView() {
@@ -65,10 +88,10 @@ class HomeFragment : Fragment() {
     }
 
     fun filtrar(texto: String){
-        var listaFiltrada = arrayListOf<Perro>()
+        var listaFiltrada = arrayListOf<DogModel>()
 
         listaPerro.forEach{
-            if(it.nombre.toLowerCase().contains(texto.toLowerCase())){
+            if(it.name.toLowerCase().contains(texto.toLowerCase())){
                 listaFiltrada.add(it)
             }
         }

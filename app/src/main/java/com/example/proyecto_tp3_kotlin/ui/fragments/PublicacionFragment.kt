@@ -14,9 +14,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
 import com.example.proyecto_tp3_kotlin.R
 import com.example.proyecto_tp3_kotlin.model.DogModel
 import com.example.proyecto_tp3_kotlin.model.DogViewModel
+import com.example.proyecto_tp3_kotlin.service.DogDataBase
 import com.example.proyecto_tp3_kotlin.service.DogRepository
 import com.example.proyecto_tp3_kotlin.service.DogRepositoryApi
 import com.example.proyecto_tp3_kotlin.service.DogService
@@ -53,9 +55,14 @@ class PublicacionFragment : Fragment(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_publicacion, container, false)
 
+        val db = Room.databaseBuilder(
+            requireContext(),
+            DogDataBase::class.java, "dog-database"
+        ).build()
+
+        val dogdao = db.dogDao()
         dogBreed = view.findViewById(R.id.DogBreed)
         dogSubBreed = view.findViewById(R.id.DogSubBreed)
         dogSubBreed.visibility = View.GONE
@@ -71,6 +78,21 @@ class PublicacionFragment : Fragment(
         ownerDetails = view.findViewById(R.id.OwnerDetails)
 
         publicarBoton = view.findViewById(R.id.publicarBoton)
+
+        publicarBoton.setOnClickListener {
+            val dog = DogModel(
+                image = "url_de_la_imagen",
+                name = dogName.toString(),
+                age = dogAge.toString().toInt(),
+                gender = dogGender.toString(),
+                weight = dogWeight.toString().toInt(),
+                breed = dogBreed.toString(),
+                subBreed = dogSubBreed.toString(),
+                owner = "propietario",
+                ubication = "Ubicación del perro"
+            )
+            dogdao.instertAll(dog)
+        }
 
         val data = listOf("Seleccionar sexo","Hembra", "Macho")
         val genderAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, data)
@@ -242,6 +264,5 @@ class PublicacionFragment : Fragment(
     private fun displayToast(message: String) {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
     }
-
 
 }
