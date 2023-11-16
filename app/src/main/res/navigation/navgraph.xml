@@ -24,7 +24,11 @@
         android:id="@+id/fragment_publicacion"
         android:name="com.example.proyecto_tp3_kotlin.ui.fragments.PublicacionFragment"
         android:label="PublicacionFragment"
-        tools:layout="@layout/fragment_publicacion"/>
+        tools:layout="@layout/fragment_publicacion">
+        <action
+            android:id="@+id/action_fragment_publicacion_to_fragment_home"
+            app:destination="@id/fragment_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/profile"

@@ -20,7 +20,7 @@ import com.example.proyecto_tp3_kotlin.model.DogModel
 import com.example.proyecto_tp3_kotlin.model.DogViewModel
 import com.example.proyecto_tp3_kotlin.service.DogDao
 import com.example.proyecto_tp3_kotlin.service.DogDataBase
-import com.example.proyecto_tp3_kotlin.service.DogRepository
+import androidx.navigation.fragment.findNavController
 import com.example.proyecto_tp3_kotlin.service.DogRepositoryApi
 import com.example.proyecto_tp3_kotlin.service.DogService
 import kotlinx.coroutines.launch
@@ -150,6 +150,10 @@ class PublicacionFragment : Fragment(
         println(dog)
         lifecycleScope.launch(Dispatchers.IO) {
             dogDao?.instertAll(dog)
+            activity?.runOnUiThread {
+                val action = PublicacionFragmentDirections.actionFragmentPublicacionToFragmentHome()
+                findNavController().navigate(action)
+            }
         }
         println("INSERTEE!!")
         i += 1
