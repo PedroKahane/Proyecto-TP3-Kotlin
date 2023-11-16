@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -17,25 +16,72 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:background="#884CAF50"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/brandNombre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@android:color/black"
-            android:textSize="13sp"
-            tools:text="nombre" />
-
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/brandImagen"
             android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_marginBottom="16dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
             android:contentDescription=""
+            app:shapeAppearanceOverlay="@drawable/custom_rounded_mask"
             tools:image="imagen"/>
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/brandNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="13sp"
+                tools:text="nombre"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:id="@+id/brandEdad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="13sp"
+                tools:text="edad"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:id="@+id/brandRaza"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="13sp"
+                tools:text="raza"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:id="@+id/brandSubRaza"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="13sp"
+                tools:text="subRaza"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:id="@+id/brandGenero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="13sp"
+                tools:text="genero"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>
