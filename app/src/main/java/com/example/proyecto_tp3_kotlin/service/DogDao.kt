@@ -14,7 +14,7 @@ interface DogDao {
     @Query("SELECT * FROM Dog_table")
     fun getAll(): List<DogModel>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun instertAll(vararg dog: DogModel)
 
     @Query("Select * from Dog_table order by Id asc")

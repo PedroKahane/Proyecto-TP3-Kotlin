@@ -13,6 +13,7 @@ import androidx.room.Room
 import com.example.proyecto_tp3_kotlin.databinding.FragmentHomeBinding
 import com.example.proyecto_tp3_kotlin.model.AdaptadorPerro
 import com.example.proyecto_tp3_kotlin.model.DogModel
+import com.example.proyecto_tp3_kotlin.service.DogDao
 import com.example.proyecto_tp3_kotlin.service.DogDataBase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,6 +23,8 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adaptador: AdaptadorPerro
+    private var db: DogDataBase? = null
+    private var dogDao: DogDao? = null
 
     var listaPerro = arrayListOf<DogModel>()
 
@@ -30,6 +33,10 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        lifecycleScope.launch {
+            llenarLista()
+        }
+        setupRecyclerView()
         return binding.root
     }
 
@@ -57,15 +64,12 @@ class HomeFragment : Fragment() {
     }
 
     suspend fun llenarLista() = withContext(Dispatchers.IO) {
-        val db = Room.databaseBuilder(
-            requireContext(),
-            DogDataBase::class.java, "dog-database"
-        ).build()
 
-        val dogdao = db.dogDao()
+        db = DogDataBase.getDatabase(binding.root.context)
+        dogDao = db?.dogDao()
 
         // Obtener la lista de perros después de la inserción
-        val perros: List<DogModel> = dogdao.getAll()
+        val perros: List<DogModel>? = dogDao?.getAll()
 
         // Imprimir la lista de perros en la consola (puedes comentar o eliminar esta línea si no es necesario)
         println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Lista de perros: $perros")
@@ -73,12 +77,11 @@ class HomeFragment : Fragment() {
         // Actualizar la lista en el hilo principal
         withContext(Dispatchers.Main) {
             listaPerro.clear()
-            listaPerro.addAll(perros)
+            if (perros != null) {
+                listaPerro.addAll(perros)
+            }
             adaptador.notifyDataSetChanged()
         }
-
-        // Cerrar la base de datos
-        db.close()
     }
 
     private fun setupRecyclerView() {

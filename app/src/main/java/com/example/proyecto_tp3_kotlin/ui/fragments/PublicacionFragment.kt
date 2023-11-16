@@ -18,11 +18,13 @@ import androidx.room.Room
 import com.example.proyecto_tp3_kotlin.R
 import com.example.proyecto_tp3_kotlin.model.DogModel
 import com.example.proyecto_tp3_kotlin.model.DogViewModel
+import com.example.proyecto_tp3_kotlin.service.DogDao
 import com.example.proyecto_tp3_kotlin.service.DogDataBase
 import com.example.proyecto_tp3_kotlin.service.DogRepository
 import com.example.proyecto_tp3_kotlin.service.DogRepositoryApi
 import com.example.proyecto_tp3_kotlin.service.DogService
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers
 
 
 class PublicacionFragment : Fragment(
@@ -31,7 +33,7 @@ class PublicacionFragment : Fragment(
 
 
 
-
+    lateinit var v : View
     lateinit var dogName : EditText
     lateinit var dogAge : EditText
     lateinit var dogGender : Spinner
@@ -40,6 +42,8 @@ class PublicacionFragment : Fragment(
     lateinit var dogSubBreed : Spinner
     lateinit var ownerDetails : EditText
     private lateinit var remote: DogService
+    private var db: DogDataBase? = null
+    private var dogDao: DogDao? = null
     private lateinit var dogRepository: DogRepositoryApi
     lateinit var publicarBoton : Button
     private lateinit var breeds: List<String>
@@ -55,7 +59,7 @@ class PublicacionFragment : Fragment(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_publicacion, container, false)
+        v = inflater.inflate(R.layout.fragment_publicacion, container, false)
 
         val db = Room.databaseBuilder(
             requireContext(),
@@ -63,21 +67,21 @@ class PublicacionFragment : Fragment(
         ).build()
 
         val dogdao = db.dogDao()
-        dogBreed = view.findViewById(R.id.DogBreed)
-        dogSubBreed = view.findViewById(R.id.DogSubBreed)
+        dogBreed = v.findViewById(R.id.DogBreed)
+        dogSubBreed = v.findViewById(R.id.DogSubBreed)
         dogSubBreed.visibility = View.GONE
 
 
 
-        dogName = view.findViewById(R.id.DogName)
-        dogAge =view.findViewById(R.id.DogAge)
-        dogGender = view.findViewById(R.id.DogGender)
-        dogWeight = view.findViewById(R.id.DogWeight)
+        dogName = v.findViewById(R.id.DogName)
+        dogAge =v.findViewById(R.id.DogAge)
+        dogGender = v.findViewById(R.id.DogGender)
+        dogWeight = v.findViewById(R.id.DogWeight)
 
 
-        ownerDetails = view.findViewById(R.id.OwnerDetails)
+        ownerDetails = v.findViewById(R.id.OwnerDetails)
 
-        publicarBoton = view.findViewById(R.id.publicarBoton)
+        publicarBoton = v.findViewById(R.id.publicarBoton)
 
         publicarBoton.setOnClickListener {
             val dog = DogModel(
@@ -106,7 +110,7 @@ class PublicacionFragment : Fragment(
             loadBreeds()
 
         }
-        view.findViewById<Button>(R.id.publicarBoton).setOnClickListener() {
+        v.findViewById<Button>(R.id.publicarBoton).setOnClickListener() {
             if(validateInputData(dogBreed.selectedItem.toString(),selectedItemSpinnerSubBreed,dogGender.selectedItem.toString(),dogName.text.toString(), dogAge.text.toString(), dogWeight.text.toString(), ownerDetails.text.toString())) {
                 viewLifecycleOwner.lifecycleScope.launch {
                     insertDataToDatabase()
@@ -115,13 +119,13 @@ class PublicacionFragment : Fragment(
             }
         }
 
-        return view
+        return v
     }
 
     suspend fun insertDataToDatabase(){
 
-        remote = DogService()
-        dogRepository = DogRepositoryApi(remote)
+        db = DogDataBase.getDatabase(v.context)
+        dogDao = db?.dogDao()
 
         var imagen = ""
 
@@ -141,15 +145,16 @@ class PublicacionFragment : Fragment(
         } else {
             imagen = dogRepository.getImageBreed(breed)
         }
-        println(imagen)
-
-
 
         val dog = DogModel(i, imagen, name, Integer.parseInt(age), gender, Integer.parseInt(weight), breed, subBreed, owner,  "Argentina")
-        dogViewModel.addDog(dog)
-
-
+        println(dog)
+        lifecycleScope.launch(Dispatchers.IO) {
+            dogDao?.instertAll(dog)
+        }
+        println("INSERTEE!!")
         i += 1
+
+
     }
     suspend fun loadBreeds() {
         remote = DogService()
