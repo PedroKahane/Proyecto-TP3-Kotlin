@@ -27,7 +27,9 @@ abstract class DogDataBase: RoomDatabase() {
                     context.applicationContext,
                     DogDataBase::class.java,
                     "Dog_database"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 return instance
             }

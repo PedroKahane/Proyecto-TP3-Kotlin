@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.proyecto_tp3_kotlin.databinding.FragmentHomeBinding
@@ -91,10 +92,9 @@ class HomeFragment : Fragment() {
     binding.rvLista.layoutManager = LinearLayoutManager(requireContext())
         adaptador = AdaptadorPerro(listaPerro, object : OnPerroClickListener {
             override fun onPerroClick(perro: DogModel) {
-                // Aquí puedes manejar el clic del perro en el fragmento
+                val navController = findNavController()
+
                 println("Perro seleccionado: ${perro.name}, Raza: ${perro.breed}, Edad: ${perro.age}")
-                val fragmentManager = (binding.root.context as AppCompatActivity).supportFragmentManager
-                val detalleFragment = DetalleFragment()
 
                 // Crear un bundle para pasar datos al fragmento
                 val bundle = Bundle()
@@ -104,13 +104,11 @@ class HomeFragment : Fragment() {
                 bundle.putString("dueno", perro.owner)
                 bundle.putInt("edad", perro.age)
                 bundle.putInt("peso", perro.weight)
-                detalleFragment.arguments = bundle
 
-                // Abrir el fragmento
-                fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_home, detalleFragment)
-                    .addToBackStack(null)
-                    .commit()
+
+                navController.navigate(R.id.action_fragment_home_to_detalleFragment, bundle)
+                //navController.popBackStack(R.id.fragment_home, false)
+
             }
         })
 

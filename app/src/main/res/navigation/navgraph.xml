@@ -13,7 +13,9 @@
 
         <action
             android:id="@+id/action_fragment_home_to_detalleFragment"
-            app:destination="@id/detalleFragment" />
+            app:destination="@id/detalleFragment"
+            app:popUpTo="@+id/fragment_home"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/fragment_adopcion"
