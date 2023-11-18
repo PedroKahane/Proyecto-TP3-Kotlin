@@ -7,10 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.proyecto_tp3_kotlin.databinding.FragmentHomeBinding
+import com.example.proyecto_tp3_kotlin.listeners.OnPerroClickListener
 import com.example.proyecto_tp3_kotlin.model.AdaptadorPerro
 import com.example.proyecto_tp3_kotlin.model.DogModel
 import com.example.proyecto_tp3_kotlin.service.DogDao
@@ -18,6 +20,7 @@ import com.example.proyecto_tp3_kotlin.service.DogDataBase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import com.example.proyecto_tp3_kotlin.R
 
 class HomeFragment : Fragment() {
 
@@ -86,7 +89,31 @@ class HomeFragment : Fragment() {
 
     private fun setupRecyclerView() {
     binding.rvLista.layoutManager = LinearLayoutManager(requireContext())
-        adaptador = AdaptadorPerro(listaPerro)
+        adaptador = AdaptadorPerro(listaPerro, object : OnPerroClickListener {
+            override fun onPerroClick(perro: DogModel) {
+                // Aquí puedes manejar el clic del perro en el fragmento
+                println("Perro seleccionado: ${perro.name}, Raza: ${perro.breed}, Edad: ${perro.age}")
+                val fragmentManager = (binding.root.context as AppCompatActivity).supportFragmentManager
+                val detalleFragment = DetalleFragment()
+
+                // Crear un bundle para pasar datos al fragmento
+                val bundle = Bundle()
+                bundle.putString("nombre", perro.name)
+                bundle.putString("ubicacion", perro.ubication)
+                bundle.putString("sexo", perro.gender)
+                bundle.putString("dueno", perro.owner)
+                bundle.putInt("edad", perro.age)
+                bundle.putInt("peso", perro.weight)
+                detalleFragment.arguments = bundle
+
+                // Abrir el fragmento
+                fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_home, detalleFragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
+        })
+
         binding.rvLista.adapter = adaptador
     }
 
@@ -100,4 +127,8 @@ class HomeFragment : Fragment() {
         }
         adaptador.filtrar(listaFiltrada)
     }
+    /*override fun onPerroClick(perro: DogModel) {
+        // Aquí puedes imprimir por consola los datos del perro desde el fragmento
+        println("Perro seleccionado: ${perro.name}, Raza: ${perro.breed}, Edad: ${perro.age}")
+    }*/
 }

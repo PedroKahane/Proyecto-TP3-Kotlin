@@ -9,9 +9,11 @@ import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_tp3_kotlin.R
+import com.example.proyecto_tp3_kotlin.listeners.OnPerroClickListener
 
 class AdaptadorPerro(
-    var listaPerro: ArrayList<DogModel>
+    var listaPerro: ArrayList<DogModel>,
+    private val listener: OnPerroClickListener
 ): RecyclerView.Adapter<AdaptadorPerro.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -44,6 +46,9 @@ class AdaptadorPerro(
         holder.brandGenero.text = perro.gender
         val imagenDrawable = ContextCompat.getDrawable(holder.itemView.context, R.drawable.imagen_login_perro)
         holder.brandImagen.setImageDrawable(imagenDrawable)
+        holder.itemView.setOnClickListener(){
+            listener.onPerroClick(perro)
+        }
 
     }
 
