@@ -7,14 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.Room
 import com.example.proyecto_tp3_kotlin.databinding.FragmentHomeBinding
 import com.example.proyecto_tp3_kotlin.listeners.OnPerroClickListener
-import com.example.proyecto_tp3_kotlin.model.AdaptadorPerro
+import com.example.proyecto_tp3_kotlin.adapters.AdaptadorPerro
 import com.example.proyecto_tp3_kotlin.model.DogModel
 import com.example.proyecto_tp3_kotlin.service.DogDao
 import com.example.proyecto_tp3_kotlin.service.DogDataBase
@@ -57,10 +55,6 @@ class HomeFragment : Fragment() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                lifecycleScope.launch {
-                    llenarLista()
-                }
-                setupRecyclerView()
                 filtrar(s.toString())
             }
 
@@ -83,8 +77,9 @@ class HomeFragment : Fragment() {
             listaPerro.clear()
             if (perros != null) {
                 listaPerro.addAll(perros)
+                adaptador.notifyDataSetChanged()
             }
-            adaptador.notifyDataSetChanged()
+
         }
     }
 
@@ -104,6 +99,8 @@ class HomeFragment : Fragment() {
                 bundle.putString("dueno", perro.owner)
                 bundle.putInt("edad", perro.age)
                 bundle.putInt("peso", perro.weight)
+                bundle.putInt("id", perro.id)
+                bundle.putBoolean("adoptado", perro.adoptado)
 
 
                 navController.navigate(R.id.action_fragment_home_to_detalleFragment, bundle)
@@ -125,8 +122,5 @@ class HomeFragment : Fragment() {
         }
         adaptador.filtrar(listaFiltrada)
     }
-    /*override fun onPerroClick(perro: DogModel) {
-        // Aquí puedes imprimir por consola los datos del perro desde el fragmento
-        println("Perro seleccionado: ${perro.name}, Raza: ${perro.breed}, Edad: ${perro.age}")
-    }*/
+
 }

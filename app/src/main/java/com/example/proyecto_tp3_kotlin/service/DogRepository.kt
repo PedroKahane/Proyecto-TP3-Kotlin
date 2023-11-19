@@ -15,8 +15,5 @@ class DogRepository @Inject constructor(private val dogDao: DogDao) {
         dogDao.instertAll(dog)
         Log.d("MyTag", "Elemento insertado con ID: $dog")
     }
-    suspend fun getDog(id: Long){
-        dogDao.getDetails(id)
-    }
 
 }

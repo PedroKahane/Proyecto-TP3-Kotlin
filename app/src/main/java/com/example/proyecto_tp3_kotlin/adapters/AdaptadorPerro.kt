@@ -1,15 +1,15 @@
-package com.example.proyecto_tp3_kotlin.model
+package com.example.proyecto_tp3_kotlin.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_tp3_kotlin.R
 import com.example.proyecto_tp3_kotlin.listeners.OnPerroClickListener
+import com.example.proyecto_tp3_kotlin.model.DogModel
 
 class AdaptadorPerro(
     var listaPerro: ArrayList<DogModel>,
@@ -59,5 +59,6 @@ class AdaptadorPerro(
     fun filtrar(listaFiltrada: ArrayList<DogModel>){
         this.listaPerro = listaFiltrada
         notifyDataSetChanged()
+
     }
 }

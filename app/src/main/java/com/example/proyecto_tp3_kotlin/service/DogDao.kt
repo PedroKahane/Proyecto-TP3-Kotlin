@@ -17,6 +17,18 @@ interface DogDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun instertAll(vararg dog: DogModel)
 
+    @Query("update Dog_table SET adoptado = 1 where id = :id")
+    fun Adoptar(id: Int)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAllDogs(dogs: List<DogModel>)
+
+    @Query("SELECT * FROM Dog_table where favorito = 1" )
+    fun getFavorites(): List<DogModel>
+
+    @Query("SELECT * FROM Dog_table where adoptado = 1" )
+    fun getAdoptado(): List<DogModel>
+
     @Query("Select * from Dog_table order by Id asc")
     fun readAllDate():LiveData<List<DogModel>>
 

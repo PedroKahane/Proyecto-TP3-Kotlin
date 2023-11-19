@@ -1,6 +1,8 @@
 package com.example.proyecto_tp3_kotlin.ui.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,70 +11,122 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.proyecto_tp3_kotlin.R
+import com.example.proyecto_tp3_kotlin.adapters.AdaptadorPerro
+import com.example.proyecto_tp3_kotlin.databinding.FragmentAdopcionBinding
+import com.example.proyecto_tp3_kotlin.databinding.FragmentHomeBinding
+import com.example.proyecto_tp3_kotlin.listeners.OnPerroClickListener
+import com.example.proyecto_tp3_kotlin.model.DogModel
+import com.example.proyecto_tp3_kotlin.service.DogDao
+import com.example.proyecto_tp3_kotlin.service.DogDataBase
 import com.example.proyecto_tp3_kotlin.service.DogRepositoryApi
 import com.example.proyecto_tp3_kotlin.service.DogService
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class AdopcionFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private lateinit var adopcionText : TextView
-    private lateinit var remote: DogService
-    private lateinit var dogRepository: DogRepositoryApi
-    private lateinit var breeds: List<String>
-    private lateinit var subBreeds: Map<String, List<String>>
+    private lateinit var binding: FragmentAdopcionBinding
+    private lateinit var adaptador: AdaptadorPerro
+    private var db: DogDataBase? = null
+    private var dogDao: DogDao? = null
+    var listaPerro = arrayListOf<DogModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        val view = inflater.inflate(R.layout.fragment_adopcion, container, false)
-       /* adopcionText = view.findViewById(R.id.adopcionText)
-
-        adopcionText.text = "Cambie el textxxxxxxxxxxxxxo"
-        viewLifecycleOwner.lifecycleScope.launch {
-            loadDog()
-            val subrazaKelpie = subBreeds["australian"]?.get(0)
-            adopcionText.text = subrazaKelpie
-            println(subBreeds)
-            println(breeds)
-        }*/
-        return view
+        binding = FragmentAdopcionBinding.inflate(inflater, container, false)
+        lifecycleScope.launch {
+            llenarLista()
+            adaptador.notifyDataSetChanged()
+        }
+        setupRecyclerView()
+        return binding.root
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-    suspend fun loadDog() {
-        remote = DogService()
-        dogRepository = DogRepositoryApi(remote)
-
-        try {
-            breeds = dogRepository.getAvailableBreeds()
-            subBreeds = dogRepository.getAvailableSubBreeds()
+        super.onViewCreated(view, savedInstanceState)
 
 
-            /*
-            breeds.forEach { breed ->
-                println("Raza: $breed")
+        binding.buscador.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                adaptador.notifyDataSetChanged()
             }
 
-            subBreeds.forEach { (breed, subBreedsList) ->
-                println("Raza: $breed - Subrazas: $subBreedsList")
-            }*/
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
 
-            //val subrazaKelpie = availableSubBreeds["australian"]?.get(0)
-            //texto.text = subrazaKelpie
+            override fun afterTextChanged(s: Editable?) {
+                setupRecyclerView()
+                filtrar(s.toString())
+            }
 
+        })
+    }
 
-        } catch (e: Exception) {
-            // Manejar excepción aquí
-            Log.e("Example", e.stackTraceToString())
+    suspend fun llenarLista() = withContext(Dispatchers.IO) {
+
+        db = DogDataBase.getDatabase(binding.root.context)
+        dogDao = db?.dogDao()
+
+        // Obtener la lista de perros después de la inserción
+        val perros: List<DogModel>? = dogDao?.getAdoptado()
+
+        // Imprimir la lista de perros en la consola (puedes comentar o eliminar esta línea si no es necesario)
+        println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Lista de perros: $perros")
+
+        // Actualizar la lista en el hilo principal
+        withContext(Dispatchers.Main) {
+            listaPerro.clear()
+            if (perros != null) {
+                println("VACIO NO")
+                listaPerro.addAll(perros)
+                adaptador.notifyDataSetChanged()
+            }
+
         }
+    }
+    private fun setupRecyclerView() {
+        binding.rvLista.layoutManager = LinearLayoutManager(requireContext())
+        adaptador = AdaptadorPerro(listaPerro, object : OnPerroClickListener {
+            override fun onPerroClick(perro: DogModel) {
+                val navController = findNavController()
+
+                println("Perro seleccionado: ${perro.name}, Raza: ${perro.breed}, Edad: ${perro.age}")
+
+                // Crear un bundle para pasar datos al fragmento
+                val bundle = Bundle()
+                bundle.putString("nombre", perro.name)
+                bundle.putString("ubicacion", perro.ubication)
+                bundle.putString("sexo", perro.gender)
+                bundle.putString("dueno", perro.owner)
+                bundle.putInt("edad", perro.age)
+                bundle.putInt("peso", perro.weight)
+                bundle.putInt("id", perro.id)
+                bundle.putBoolean("adoptado", perro.adoptado)
+
+
+                navController.navigate(R.id.action_fragment_adopcion_to_detalleFragment, bundle)
+                //navController.popBackStack(R.id.fragment_home, false)
+
+            }
+        })
+        binding.rvLista.adapter = adaptador
+    }
+    fun filtrar(texto: String){
+        var listaFiltrada = arrayListOf<DogModel>()
+
+        listaPerro.forEach{
+            if(it.name.toLowerCase().contains(texto.toLowerCase())){
+                listaFiltrada.add(it)
+            }
+        }
+        adaptador.filtrar(listaFiltrada)
     }
 }

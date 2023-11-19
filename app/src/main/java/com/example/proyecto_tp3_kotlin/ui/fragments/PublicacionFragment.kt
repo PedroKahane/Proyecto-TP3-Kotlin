@@ -17,7 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import com.example.proyecto_tp3_kotlin.R
 import com.example.proyecto_tp3_kotlin.model.DogModel
-import com.example.proyecto_tp3_kotlin.model.DogViewModel
+import com.example.proyecto_tp3_kotlin.viewmodels.DogViewModel
 import com.example.proyecto_tp3_kotlin.service.DogDao
 import com.example.proyecto_tp3_kotlin.service.DogDataBase
 import androidx.navigation.fragment.findNavController

@@ -36,7 +36,14 @@ class DogModel(
     val owner: String,
 
     @ColumnInfo(name = "ubication")
-    val ubication: String
+    val ubication: String,
+
+    @ColumnInfo(name = "favorito")
+    val esFavorito: Boolean = false,
+
+    @ColumnInfo(name = "adoptado")
+    val adoptado: Boolean = false
+
 ){
     override fun toString(): String {
         return "DogModel(name=$name, breed=$breed, subBreed=$subBreed, owner=$owner, ...)"

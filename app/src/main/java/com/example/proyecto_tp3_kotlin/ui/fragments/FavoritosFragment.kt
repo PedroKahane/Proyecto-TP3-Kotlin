@@ -1,60 +1,120 @@
 package com.example.proyecto_tp3_kotlin.ui.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.proyecto_tp3_kotlin.R
+import com.example.proyecto_tp3_kotlin.adapters.AdaptadorPerro
+import com.example.proyecto_tp3_kotlin.databinding.FragmentFavoritosBinding
+import com.example.proyecto_tp3_kotlin.databinding.FragmentHomeBinding
+import com.example.proyecto_tp3_kotlin.listeners.OnPerroClickListener
+import com.example.proyecto_tp3_kotlin.model.DogModel
+import com.example.proyecto_tp3_kotlin.service.DogDao
+import com.example.proyecto_tp3_kotlin.service.DogDataBase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [FavoritosFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FavoritosFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentFavoritosBinding
+    private lateinit var adaptador: AdaptadorPerro
+    private var db: DogDataBase? = null
+    private var dogDao: DogDao? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    var listaPerro = arrayListOf<DogModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favoritos, container, false)
+        binding = FragmentFavoritosBinding.inflate(inflater, container, false)
+        lifecycleScope.launch {
+            llenarLista()
+        }
+        setupRecyclerView()
+        return binding.root
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FavoritosFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FavoritosFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.buscador.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                filtrar(s.toString())
+
+            }
+
+        })
+    }
+    suspend fun llenarLista() = withContext(Dispatchers.IO) {
+
+        db = DogDataBase.getDatabase(binding.root.context)
+        dogDao = db?.dogDao()
+
+        // Obtener la lista de perros después de la inserción
+        val perros: List<DogModel>? = dogDao?.getFavorites()
+
+        // Imprimir la lista de perros en la consola (puedes comentar o eliminar esta línea si no es necesario)
+        println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Lista de perros: $perros")
+
+        // Actualizar la lista en el hilo principal
+        withContext(Dispatchers.Main) {
+            listaPerro.clear()
+            if (perros != null) {
+                listaPerro.addAll(perros)
+                adaptador.notifyDataSetChanged()
+            }
+
+        }
+    }
+    private fun setupRecyclerView() {
+        binding.rvLista.layoutManager = LinearLayoutManager(requireContext())
+        adaptador = AdaptadorPerro(listaPerro, object : OnPerroClickListener {
+            override fun onPerroClick(perro: DogModel) {
+                val navController = findNavController()
+
+                println("Perro seleccionado: ${perro.name}, Raza: ${perro.breed}, Edad: ${perro.age}")
+
+                // Crear un bundle para pasar datos al fragmento
+                val bundle = Bundle()
+                bundle.putString("nombre", perro.name)
+                bundle.putString("ubicacion", perro.ubication)
+                bundle.putString("sexo", perro.gender)
+                bundle.putString("dueno", perro.owner)
+                bundle.putInt("edad", perro.age)
+                bundle.putInt("peso", perro.weight)
+                bundle.putInt("id", perro.id)
+                bundle.putBoolean("adoptado", perro.adoptado)
+
+
+                navController.navigate(R.id.action_fragment_favoritos_to_detalleFragment, bundle)
+                //navController.popBackStack(R.id.fragment_home, false)
+
+            }
+        })
+        binding.rvLista.adapter = adaptador
+    }
+    fun filtrar(texto: String){
+        var listaFiltrada = arrayListOf<DogModel>()
+
+        listaPerro.forEach{
+            if(it.name.toLowerCase().contains(texto.toLowerCase())){
+                listaFiltrada.add(it)
+            }
+        }
+        adaptador.filtrar(listaFiltrada)
     }
 }
