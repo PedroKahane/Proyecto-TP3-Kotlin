@@ -76,6 +76,7 @@ class FavoritosFragment : Fragment() {
             if (perros != null) {
                 listaPerro.addAll(perros)
                 adaptador.notifyDataSetChanged()
+                setupRecyclerView()
             }
 
         }

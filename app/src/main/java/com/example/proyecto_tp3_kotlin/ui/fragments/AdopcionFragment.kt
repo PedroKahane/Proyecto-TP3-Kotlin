@@ -44,7 +44,7 @@ class AdopcionFragment : Fragment() {
         binding = FragmentAdopcionBinding.inflate(inflater, container, false)
         lifecycleScope.launch {
             llenarLista()
-            adaptador.notifyDataSetChanged()
+
         }
         setupRecyclerView()
         return binding.root
@@ -56,7 +56,6 @@ class AdopcionFragment : Fragment() {
 
         binding.buscador.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                adaptador.notifyDataSetChanged()
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -85,9 +84,9 @@ class AdopcionFragment : Fragment() {
         withContext(Dispatchers.Main) {
             listaPerro.clear()
             if (perros != null) {
-                println("VACIO NO")
                 listaPerro.addAll(perros)
                 adaptador.notifyDataSetChanged()
+                setupRecyclerView()
             }
 
         }
