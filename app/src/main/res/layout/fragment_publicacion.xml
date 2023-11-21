@@ -9,22 +9,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragments.PublicacionFragment"
-        android:background="@color/white"
-        >
+        tools:context=".ui.fragments.PublicacionFragment">
 
 
         <TextView
             android:id="@+id/publicacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="15dp"
             android:text="Publicacion"
             android:textSize="30sp"
-            android:layout_marginTop="10dp"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <EditText
@@ -32,130 +29,135 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/custom_input"
+            android:background="@color/grey"
             android:hint="Name"
             android:inputType="text"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
+            android:textColorHint="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/publicacion" />
 
         <EditText
             android:id="@+id/DogAge"
-            android:hint="Age"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:background="@drawable/custom_input"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:inputType="number"
-            app:layout_constraintTop_toBottomOf="@id/DogName"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="40dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="20dp"
-            />
+            android:background="@color/grey"
+            android:hint="Age"
+            android:inputType="number"
+            android:paddingStart="10dp"
+            android:textColorHint="@color/black"
+            android:paddingEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/DogName" />
 
         <Spinner
             android:id="@+id/DogGender"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/black"
+            android:backgroundTint="@color/grey"
             android:hint="Sex"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:background="@drawable/custom_input"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            app:layout_constraintTop_toBottomOf="@id/DogAge"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textColorHint="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/DogAge" />
 
         <EditText
             android:id="@+id/DogWeight"
-            android:hint="Weight"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:background="@drawable/custom_input"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:inputType="number"
-            app:layout_constraintTop_toBottomOf="@id/DogGender"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="40dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="20dp"
-            />
+            android:background="@drawable/custom_input"
+            android:backgroundTint="@color/grey"
+            android:hint="Weight"
+            android:inputType="number"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColorHint="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/DogGender" />
 
         <Spinner
             android:id="@+id/DogBreed"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/black"
+            android:backgroundTint="@color/grey"
             android:hint="Breed"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:background="@drawable/custom_input"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            app:layout_constraintTop_toBottomOf="@id/DogWeight"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textColorHint="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/DogWeight" />
 
         <Spinner
             android:id="@+id/DogSubBreed"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/black"
+            android:backgroundTint="@color/grey"
             android:hint="Subbreed"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:background="@drawable/custom_input"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            app:layout_constraintTop_toBottomOf="@id/DogBreed"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textColorHint="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/DogBreed" />
 
         <EditText
             android:id="@+id/OwnerDetails"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/custom_input"
+            android:backgroundTint="@color/grey"
             android:hint="Owner Details"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:background="@drawable/custom_input"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            app:layout_constraintTop_toBottomOf="@id/DogSubBreed"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textColorHint="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/DogSubBreed" />
 
         <Button
             android:id="@+id/publicarBoton"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Publicar"
-            app:layout_constraintTop_toBottomOf="@id/OwnerDetails"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="40dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="20dp"
-            />
-
-
-
-
+            android:layout_marginBottom="40dp"
+            android:text="Publicar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColorHint="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/OwnerDetails" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

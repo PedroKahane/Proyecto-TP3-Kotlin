@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="16dp"
     android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
     android:layout_marginBottom="8dp"
-    android:background="#FFFFFF"
+    android:background="@color/colorPrimary"
     android:radius="16dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="0dp"
@@ -16,10 +16,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#884CAF50"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="10dp"
-        android:gravity="center_vertical">
+        android:padding="10dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/brandImagen"
@@ -27,9 +27,9 @@
             android:layout_height="105dp"
             android:layout_marginEnd="16dp"
             android:contentDescription=""
+            android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@drawable/custom_rounded_mask"
-            tools:image="imagen"
-            android:scaleType="centerCrop" />
+            tools:image="imagen" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -41,46 +41,46 @@
                 android:id="@+id/brandNombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:textColor="@android:color/black"
                 android:textSize="13sp"
-                tools:text="nombre"
-                android:layout_gravity="center_horizontal"/>
+                tools:text="nombre" />
 
             <TextView
                 android:id="@+id/brandEdad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:textColor="@android:color/black"
                 android:textSize="13sp"
-                tools:text="edad"
-                android:layout_gravity="center_horizontal"/>
+                tools:text="edad" />
 
             <TextView
                 android:id="@+id/brandRaza"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:textColor="@android:color/black"
                 android:textSize="13sp"
-                tools:text="raza"
-                android:layout_gravity="center_horizontal"/>
+                tools:text="raza" />
 
             <TextView
                 android:id="@+id/brandSubRaza"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:textColor="@android:color/black"
                 android:textSize="13sp"
-                tools:text="subRaza"
-                android:layout_gravity="center_horizontal"/>
+                tools:text="subRaza" />
 
             <TextView
                 android:id="@+id/brandGenero"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:textColor="@android:color/black"
                 android:textSize="13sp"
-                tools:text="genero"
-                android:layout_gravity="center_horizontal"/>
+                tools:text="genero" />
         </LinearLayout>
 
     </LinearLayout>

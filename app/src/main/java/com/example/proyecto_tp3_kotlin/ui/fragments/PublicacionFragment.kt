@@ -108,7 +108,6 @@ class PublicacionFragment : Fragment(
         dogViewModel = ViewModelProvider(this).get(DogViewModel::class.java)
         viewLifecycleOwner.lifecycleScope.launch {
             loadBreeds()
-
         }
         v.findViewById<Button>(R.id.publicarBoton).setOnClickListener() {
             if(validateInputData(dogBreed.selectedItem.toString(),selectedItemSpinnerSubBreed,dogGender.selectedItem.toString(),dogName.text.toString(), dogAge.text.toString(), dogWeight.text.toString(), ownerDetails.text.toString())) {
