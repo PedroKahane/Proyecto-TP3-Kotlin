@@ -78,6 +78,7 @@ class HomeFragment : Fragment() {
             if (perros != null) {
                 listaPerro.addAll(perros)
                 adaptador.notifyDataSetChanged()
+                setupRecyclerView()
             }
 
         }
@@ -123,7 +124,7 @@ class HomeFragment : Fragment() {
         var listaFiltrada = arrayListOf<DogModel>()
 
         listaPerro.forEach{
-            if(it.name.toLowerCase().contains(texto.toLowerCase())){
+            if(it.breed.toLowerCase().contains(texto.toLowerCase()) || it.subBreed.toLowerCase().contains(texto.toLowerCase()) || it.name.toLowerCase().contains(texto.toLowerCase())){
                 listaFiltrada.add(it)
             }
         }

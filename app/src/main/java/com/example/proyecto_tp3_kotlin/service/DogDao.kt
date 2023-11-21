@@ -34,4 +34,8 @@ interface DogDao {
 
     @Query("Select * from Dog_table WHERE Id = :id")
     fun getDetails(id: Long):LiveData<List<DogModel>>
+
+    @Query("DELETE FROM dog_table")
+    suspend fun borrarTodosLosPerros()
+
 }

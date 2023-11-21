@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-@Database(entities = [DogModel:: class], version = 4, exportSchema = false)
+@Database(entities = [DogModel:: class], version = 5, exportSchema = false)
 abstract class DogDataBase: RoomDatabase() {
 
     abstract fun dogDao(): DogDao
@@ -48,14 +48,14 @@ abstract class DogDataBase: RoomDatabase() {
                 // Lógica para llenar la base de datos con perros iniciales
                 val dogDao = database.dogDao()
                 // Insertar perros iniciales
-
+                //dogDao.borrarTodosLosPerros()
                 if (dogDao.getAll().isEmpty()) {
                     val initialDogs = listOf(
                         DogModel(
                             name = "Chicho",
                             age = 4,
                             gender = "Macho",
-                            weight = 15,
+                            weight = 8,
                             owner = "Oscar",
                             ubication = "Buenos Aires",
                             esFavorito = false,
@@ -68,7 +68,7 @@ abstract class DogDataBase: RoomDatabase() {
                             name = "Peca",
                             age = 1,
                             gender = "Hembra",
-                            weight = 15,
+                            weight = 18,
                             owner = "Juan",
                             ubication = "Buenos Aires",
                             esFavorito = false,
@@ -81,7 +81,7 @@ abstract class DogDataBase: RoomDatabase() {
                             name = "Lenny",
                             age = 3,
                             gender = "Hembra",
-                            weight = 15,
+                            weight = 20,
                             owner = "Ramiro",
                             ubication = "Buenos Aires",
                             esFavorito = false,
@@ -94,7 +94,7 @@ abstract class DogDataBase: RoomDatabase() {
                             name = "Rafael",
                             age = 19,
                             gender = "Macho",
-                            weight = 15,
+                            weight = 12,
                             owner = "Santiago",
                             ubication = "Buenos Aires",
                             esFavorito = false,
@@ -107,7 +107,7 @@ abstract class DogDataBase: RoomDatabase() {
                             name = "Perro",
                             age = 10,
                             gender = "Macho",
-                            weight = 15,
+                            weight = 30,
                             owner = "Sofia",
                             ubication = "Buenos Aires",
                             esFavorito = false,
@@ -133,7 +133,7 @@ abstract class DogDataBase: RoomDatabase() {
                             name = "Bart",
                             age = 4,
                             gender = "Macho",
-                            weight = 15,
+                            weight = 25,
                             owner = "Delfina",
                             ubication = "Buenos Aires",
                             esFavorito = true,
@@ -146,7 +146,7 @@ abstract class DogDataBase: RoomDatabase() {
                             name = "Lola",
                             age = 5,
                             gender = "Hembra",
-                            weight = 15,
+                            weight = 22,
                             owner = "Juana",
                             ubication = "Buenos Aires",
                             esFavorito = false,
@@ -159,7 +159,7 @@ abstract class DogDataBase: RoomDatabase() {
                             name = "Kira",
                             age = 2,
                             gender = "Hembra",
-                            weight = 15,
+                            weight = 9,
                             owner = "Luana",
                             ubication = "Buenos Aires",
                             esFavorito = true,
@@ -167,6 +167,32 @@ abstract class DogDataBase: RoomDatabase() {
                             breed = "poodle",
                             subBreed = "toy",
                             image = "https://images.dog.ceo/breeds/poodle-toy/n02113624_223.jpg"
+                        ),
+                        DogModel(
+                            name = "Magui",
+                            age = 2,
+                            gender = "Hembra",
+                            weight = 24,
+                            owner = "Franco",
+                            ubication = "Buenos Aires",
+                            esFavorito = false,
+                            adoptado = false,
+                            breed = "doberman",
+                            subBreed = "",
+                            image = "https://images.dog.ceo/breeds/doberman/n02107142_699.jpg"
+                        ),
+                        DogModel(
+                            name = "Teo",
+                            age = 4,
+                            gender = "Macho",
+                            weight = 11,
+                            owner = "Luciana",
+                            ubication = "Buenos Aires",
+                            esFavorito = false,
+                            adoptado = false,
+                            breed = "mountain",
+                            subBreed = "bernese",
+                            image = "https://images.dog.ceo/breeds/mountain-bernese/n02107683_3900.jpg"
                         ),
                     )
                     dogDao.insertAllDogs(initialDogs)
