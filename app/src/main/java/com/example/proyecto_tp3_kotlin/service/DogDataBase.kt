@@ -53,7 +53,7 @@ abstract class DogDataBase: RoomDatabase() {
                     val initialDogs = listOf(
                         DogModel(
                             name = "Chicho",
-                            age = 19,
+                            age = 4,
                             gender = "Macho",
                             weight = 15,
                             owner = "Oscar",
@@ -66,7 +66,7 @@ abstract class DogDataBase: RoomDatabase() {
                         ),
                         DogModel(
                             name = "Peca",
-                            age = 19,
+                            age = 1,
                             gender = "Hembra",
                             weight = 15,
                             owner = "Juan",
@@ -79,7 +79,7 @@ abstract class DogDataBase: RoomDatabase() {
                         ),
                         DogModel(
                             name = "Lenny",
-                            age = 19,
+                            age = 3,
                             gender = "Hembra",
                             weight = 15,
                             owner = "Ramiro",
@@ -105,7 +105,7 @@ abstract class DogDataBase: RoomDatabase() {
                         ),
                         DogModel(
                             name = "Perro",
-                            age = 19,
+                            age = 10,
                             gender = "Macho",
                             weight = 15,
                             owner = "Sofia",
@@ -118,7 +118,7 @@ abstract class DogDataBase: RoomDatabase() {
                         ),
                         DogModel(
                             name = "Toto",
-                            age = 19,
+                            age = 12,
                             gender = "Macho",
                             weight = 15,
                             owner = "Juan",
@@ -131,7 +131,7 @@ abstract class DogDataBase: RoomDatabase() {
                         ),
                         DogModel(
                             name = "Bart",
-                            age = 19,
+                            age = 4,
                             gender = "Macho",
                             weight = 15,
                             owner = "Delfina",
@@ -144,7 +144,7 @@ abstract class DogDataBase: RoomDatabase() {
                         ),
                         DogModel(
                             name = "Lola",
-                            age = 19,
+                            age = 5,
                             gender = "Hembra",
                             weight = 15,
                             owner = "Juana",
@@ -157,7 +157,7 @@ abstract class DogDataBase: RoomDatabase() {
                         ),
                         DogModel(
                             name = "Kira",
-                            age = 19,
+                            age = 2,
                             gender = "Hembra",
                             weight = 15,
                             owner = "Luana",

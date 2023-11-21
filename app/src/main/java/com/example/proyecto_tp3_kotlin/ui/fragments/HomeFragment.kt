@@ -102,6 +102,12 @@ class HomeFragment : Fragment() {
                 bundle.putInt("id", perro.id)
                 bundle.putBoolean("adoptado", perro.adoptado)
                 bundle.putString("imageUrl", perro.image)
+                bundle.putString("raza", perro.breed)
+                if (perro.subBreed.isEmpty()){
+                    bundle.putString("subRaza", "N/A")
+                }else{
+                    bundle.putString("subRaza", perro.subBreed)
+                }
 
 
                 navController.navigate(R.id.action_fragment_home_to_detalleFragment, bundle)

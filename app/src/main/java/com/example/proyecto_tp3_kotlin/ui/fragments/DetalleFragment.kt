@@ -1,10 +1,13 @@
 package com.example.proyecto_tp3_kotlin.ui.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -38,6 +41,8 @@ class DetalleFragment : Fragment()
         val dueno = arguments?.getString("dueno")
         val edad = arguments?.getInt("edad", 0) ?: 0
         val peso = arguments?.getInt("peso", 0) ?: 0
+        val raza = arguments?.getString("raza")
+        val subRaza = arguments?.getString("subRaza", "N/A")
         val id = arguments?.getInt("id") ?: 0
         val adoptado = arguments?.getBoolean("adoptado") ?: false
         val imageUrl = arguments?.getString("imageUrl")
@@ -49,9 +54,20 @@ class DetalleFragment : Fragment()
         v.findViewById<TextView>(R.id.EdadNumero).text = edad.toString()
         v.findViewById<TextView>(R.id.SexPerro).text = sexo
         v.findViewById<TextView>(R.id.PesoPerro).text = peso.toString() + "Kg"
+        v.findViewById<TextView>(R.id.RazaPerro).text = raza
+        v.findViewById<TextView>(R.id.SubRazaPerro).text = subRaza
         val imageView = v.findViewById<ImageView>(R.id.imageView)
         Picasso.get().load(imageUrl).into(imageView)
+        v.findViewById<ImageButton>(R.id.imageView4).setOnClickListener() {
+            val intent = Intent(Intent.ACTION_DIAL)
 
+            if (intent.resolveActivity(requireActivity().packageManager) != null) {
+                startActivity(intent)
+            } else {
+                // Manejar el caso en el que no hay aplicación de llamadas disponible
+                Toast.makeText(requireContext(), "No se encontró una aplicación de llamadas", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         v.findViewById<Button>(R.id.Adoptar).setOnClickListener() {
             if(validate(adoptado)) {
