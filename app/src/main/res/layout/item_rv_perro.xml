@@ -24,11 +24,12 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/brandImagen"
             android:layout_width="160dp"
-            android:layout_height="match_parent"
+            android:layout_height="105dp"
             android:layout_marginEnd="16dp"
             android:contentDescription=""
             app:shapeAppearanceOverlay="@drawable/custom_rounded_mask"
-            tools:image="imagen"/>
+            tools:image="imagen"
+            android:scaleType="centerCrop" />
 
         <LinearLayout
             android:layout_width="0dp"

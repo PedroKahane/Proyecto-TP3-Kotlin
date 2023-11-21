@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_tp3_kotlin.R
 import com.example.proyecto_tp3_kotlin.listeners.OnPerroClickListener
 import com.example.proyecto_tp3_kotlin.model.DogModel
+import com.squareup.picasso.Picasso
 
 class AdaptadorPerro(
     var listaPerro: ArrayList<DogModel>,
@@ -44,8 +45,8 @@ class AdaptadorPerro(
         }
 
         holder.brandGenero.text = perro.gender
-        val imagenDrawable = ContextCompat.getDrawable(holder.itemView.context, R.drawable.imagen_login_perro)
-        holder.brandImagen.setImageDrawable(imagenDrawable)
+        Picasso.get().load(perro.image).into(holder.brandImagen)
+
         holder.itemView.setOnClickListener(){
             listener.onPerroClick(perro)
         }

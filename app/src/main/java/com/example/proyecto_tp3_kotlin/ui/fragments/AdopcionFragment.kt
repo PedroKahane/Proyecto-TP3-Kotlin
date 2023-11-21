@@ -109,6 +109,8 @@ class AdopcionFragment : Fragment() {
                 bundle.putInt("peso", perro.weight)
                 bundle.putInt("id", perro.id)
                 bundle.putBoolean("adoptado", perro.adoptado)
+                bundle.putString("imageUrl", perro.image)
+
 
 
                 navController.navigate(R.id.action_fragment_adopcion_to_detalleFragment, bundle)

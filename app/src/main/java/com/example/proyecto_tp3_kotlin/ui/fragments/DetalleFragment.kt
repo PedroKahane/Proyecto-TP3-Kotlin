@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ import com.example.proyecto_tp3_kotlin.R
 import com.example.proyecto_tp3_kotlin.adapters.AdaptadorPerro
 import com.example.proyecto_tp3_kotlin.service.DogDao
 import com.example.proyecto_tp3_kotlin.service.DogDataBase
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -38,6 +40,7 @@ class DetalleFragment : Fragment()
         val peso = arguments?.getInt("peso", 0) ?: 0
         val id = arguments?.getInt("id") ?: 0
         val adoptado = arguments?.getBoolean("adoptado") ?: false
+        val imageUrl = arguments?.getString("imageUrl")
 
         // Configurar las vistas con los datos del perro
         v.findViewById<TextView>(R.id.Nombre).text = nombre
@@ -46,7 +49,10 @@ class DetalleFragment : Fragment()
         v.findViewById<TextView>(R.id.EdadNumero).text = edad.toString()
         v.findViewById<TextView>(R.id.SexPerro).text = sexo
         v.findViewById<TextView>(R.id.PesoPerro).text = peso.toString() + "Kg"
-        println(adoptado)
+        val imageView = v.findViewById<ImageView>(R.id.imageView)
+        Picasso.get().load(imageUrl).into(imageView)
+
+
         v.findViewById<Button>(R.id.Adoptar).setOnClickListener() {
             if(validate(adoptado)) {
                 viewLifecycleOwner.lifecycleScope.launch {

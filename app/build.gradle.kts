@@ -83,5 +83,6 @@ dependencies {
     implementation("androidx.room:room-runtime:2.6.0")
     kapt("androidx.room:room-compiler:2.6.0")
     implementation ("com.facebook.stetho:stetho:1.5.1")
+    implementation ("com.squareup.picasso:picasso:2.8")
 
 }

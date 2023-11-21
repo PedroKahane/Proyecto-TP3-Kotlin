@@ -101,6 +101,7 @@ class HomeFragment : Fragment() {
                 bundle.putInt("peso", perro.weight)
                 bundle.putInt("id", perro.id)
                 bundle.putBoolean("adoptado", perro.adoptado)
+                bundle.putString("imageUrl", perro.image)
 
 
                 navController.navigate(R.id.action_fragment_home_to_detalleFragment, bundle)
