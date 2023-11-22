@@ -102,7 +102,14 @@ class HomeFragment : Fragment() {
                 // Crear un bundle para pasar datos al fragmento
                 val bundle = Bundle()
                 bundle.putString("nombre", perro.name)
-                // ... (resto del código)
+                bundle.putString("ubicacion", perro.ubication)
+                bundle.putString("sexo", perro.gender)
+                bundle.putString("dueno", perro.owner)
+                bundle.putInt("edad", perro.age)
+                bundle.putInt("peso", perro.weight)
+                bundle.putInt("id", perro.id)
+                bundle.putBoolean("adoptado", perro.adoptado)
+                bundle.putString("imageUrl", perro.image)
 
                 navController.navigate(R.id.action_fragment_home_to_detalleFragment, bundle)
             }
@@ -133,22 +140,12 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.IO) {
             dogDao?.favorito(id)
             activity?.runOnUiThread {
-                val action = DetalleFragmentDirections.actionDetalleFragmentToFragmentAdopcion()
+                adaptador.notifyDataSetChanged()
+                val action = HomeFragmentDirections.actionFragmentHomeToFragmentFavoritos()
                 findNavController().navigate(action)
             }
         }
     }
 
-    private fun displayToast(message: String) {
-        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
-    }
-    private fun validate(favorito: Boolean): Boolean{
-        println(favorito)
-        if(favorito == true){
-            displayToast("Este perro ya fue guardado!")
-            return false
-        }
-        return true
-    }
 
 }

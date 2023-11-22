@@ -20,7 +20,7 @@ interface DogDao {
     @Query("update Dog_table SET adoptado = 1 where id = :id")
     fun Adoptar(id: Int)
 
-    @Query("update Dog_table SET favorito = 1 where id = :id")
+    @Query("UPDATE Dog_table SET favorito = CASE WHEN favorito = 0 THEN 1 ELSE 0 END WHERE id = :id")
     fun favorito(id: Int)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

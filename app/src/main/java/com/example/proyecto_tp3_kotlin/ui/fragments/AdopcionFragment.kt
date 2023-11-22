@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
@@ -117,6 +118,10 @@ class AdopcionFragment : Fragment() {
                 //navController.popBackStack(R.id.fragment_home, false)
 
             }
+            override fun onPerroClickFavorito(perro: DogModel, favoritoButton: ImageButton) {
+                agregarFavorito(perro.id)
+                // Aquí puedes manejar la lógica específica del botón favorito si es necesario
+            }
         })
         binding.rvLista.adapter = adaptador
     }
@@ -129,5 +134,17 @@ class AdopcionFragment : Fragment() {
             }
         }
         adaptador.filtrar(listaFiltrada)
+    }
+    fun agregarFavorito(id: Int){
+        db = DogDataBase.getDatabase(binding.root.context)
+        dogDao = db?.dogDao()
+        lifecycleScope.launch(Dispatchers.IO) {
+            dogDao?.favorito(id)
+            activity?.runOnUiThread {
+                adaptador.notifyDataSetChanged()
+                val action = AdopcionFragmentDirections.actionFragmentAdopcionToFragmentFavoritos()
+                findNavController().navigate(action)
+            }
+        }
     }
 }

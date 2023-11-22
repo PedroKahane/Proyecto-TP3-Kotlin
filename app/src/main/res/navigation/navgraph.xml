@@ -16,6 +16,11 @@
             app:destination="@id/detalleFragment"
             app:popUpTo="@+id/fragment_home"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_favoritos"
+            app:destination="@id/fragment_favoritos"
+            app:popUpTo="@+id/fragment_home"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/fragment_adopcion"
@@ -26,7 +31,12 @@
             android:id="@+id/action_fragment_adopcion_to_detalleFragment"
             app:destination="@id/detalleFragment"
             app:popUpTo="@+id/fragment_adopcion"
-            app:popUpToInclusive="true" />/>
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_fragment_adopcion_to_fragment_favoritos"
+            app:destination="@id/fragment_favoritos"
+            app:popUpTo="@+id/fragment_adopcion"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/fragment_favoritos"
@@ -37,7 +47,10 @@
             android:id="@+id/action_fragment_favoritos_to_detalleFragment"
             app:destination="@id/detalleFragment"
             app:popUpTo="@+id/fragment_favoritos"
-            app:popUpToInclusive="true" />/>/>
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_fragment_favoritos_self"
+            app:destination="@id/fragment_favoritos" />
     </fragment>
     <fragment
         android:id="@+id/fragment_publicacion"

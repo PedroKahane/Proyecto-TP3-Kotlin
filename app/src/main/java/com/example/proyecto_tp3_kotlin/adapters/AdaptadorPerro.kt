@@ -59,6 +59,12 @@ class AdaptadorPerro(
         holder.iconoFavorito.setOnClickListener {
             onPerroClickListener.onPerroClickFavorito(perro, holder.iconoFavorito)
         }
+        if(perro.favorito){
+            holder.iconoFavorito.setImageResource(R.drawable.guardado)
+        }
+        if(!perro.favorito){
+            holder.iconoFavorito.setImageResource(R.drawable.sin_guardar)
+        }
 
 
     }
