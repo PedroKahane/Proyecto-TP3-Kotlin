@@ -105,6 +105,12 @@ class HomeFragment : Fragment() {
                 bundle.putString("ubicacion", perro.ubication)
                 bundle.putString("sexo", perro.gender)
                 bundle.putString("dueno", perro.owner)
+                bundle.putString("raza", perro.breed)
+                if(perro.subBreed == null || perro.subBreed == ""){
+                    bundle.putString("subRaza", "N/A")
+                } else {
+                    bundle.putString("subRaza", perro.subBreed)
+                }
                 bundle.putInt("edad", perro.age)
                 bundle.putInt("peso", perro.weight)
                 bundle.putInt("id", perro.id)

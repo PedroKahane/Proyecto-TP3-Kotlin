@@ -69,7 +69,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/settings"
-        android:name="com.example.proyecto_tp3_kotlin.settingFragment"
+        android:name="com.example.proyecto_tp3_kotlin.ui.fragments.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
     <fragment
