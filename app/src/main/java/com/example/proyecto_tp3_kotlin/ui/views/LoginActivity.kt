@@ -9,6 +9,7 @@ import com.example.proyecto_tp3_kotlin.MainActivity
 import com.example.proyecto_tp3_kotlin.R
 import com.example.proyecto_tp3_kotlin.databinding.ActivityLoginBinding
 import com.example.proyecto_tp3_kotlin.databinding.ActivityMainBinding
+import com.example.proyecto_tp3_kotlin.ui.fragments.ProfileFragment
 
 class LoginActivity : AppCompatActivity() {
 
@@ -20,12 +21,15 @@ class LoginActivity : AppCompatActivity() {
 
         var buttonLogin = findViewById<Button>(R.id.button_login)
 
-        buttonLogin.setOnClickListener{
+        buttonLogin.setOnClickListener {
+            if (validarNumero() && validarNombre()) {
+                val nombre = binding.name.editableText.toString()
+                val bundle = Bundle()
+                bundle.putString("nombre", nombre)
 
-            if (validarNumero() && validarNombre()){
                 val intent = Intent(this, MainActivity::class.java);
                 startActivity(intent)
-            }else{
+            } else {
                 validate()
             }
         }

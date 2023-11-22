@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.views.LoginActivity">
+    tools:context=".ui.views.LoginActivity"
+    android:id="@+id/fragment_container">
 
     <ImageView
         android:id="@+id/imagen_login_perro"
@@ -29,8 +30,7 @@
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagen_login_perro"
-/>
+        app:layout_constraintTop_toBottomOf="@+id/imagen_login_perro" />
 
     <EditText
         android:id="@+id/phone"
@@ -44,8 +44,7 @@
         android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name"
-/>
+        app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <Button
         android:id="@+id/button_login"

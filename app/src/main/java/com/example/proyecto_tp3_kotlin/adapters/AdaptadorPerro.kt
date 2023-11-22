@@ -3,6 +3,7 @@ package com.example.proyecto_tp3_kotlin.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -13,17 +14,21 @@ import com.example.proyecto_tp3_kotlin.model.DogModel
 import com.squareup.picasso.Picasso
 
 class AdaptadorPerro(
+
     var listaPerro: ArrayList<DogModel>,
-    private val listener: OnPerroClickListener
+    private val onPerroClickListener: OnPerroClickListener
+
 ): RecyclerView.Adapter<AdaptadorPerro.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         val brandNombre = itemView.findViewById(R.id.brandNombre) as TextView
         val brandImagen = itemView.findViewById(R.id.brandImagen) as ImageView
         val brandEdad = itemView.findViewById(R.id.brandEdad) as TextView
         val brandRaza = itemView.findViewById(R.id.brandRaza) as TextView
         val brandSubRaza = itemView.findViewById(R.id.brandSubRaza) as TextView
         val brandGenero = itemView.findViewById(R.id.brandGenero) as TextView
+        val iconoFavorito: ImageButton = itemView.findViewById(R.id.favorito) as ImageButton
 
     }
 
@@ -47,9 +52,14 @@ class AdaptadorPerro(
         holder.brandGenero.text = perro.gender
         Picasso.get().load(perro.image).into(holder.brandImagen)
 
-        holder.itemView.setOnClickListener(){
-            listener.onPerroClick(perro)
+        holder.itemView.setOnClickListener {
+            onPerroClickListener.onPerroClick(perro)
         }
+
+        holder.iconoFavorito.setOnClickListener {
+            onPerroClickListener.onPerroClickFavorito(perro, holder.iconoFavorito)
+        }
+
 
     }
 

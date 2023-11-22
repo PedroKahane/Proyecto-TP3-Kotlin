@@ -39,7 +39,7 @@ class DogModel(
     val ubication: String,
 
     @ColumnInfo(name = "favorito")
-    val esFavorito: Boolean = false,
+    val favorito: Boolean = false,
 
     @ColumnInfo(name = "adoptado")
     val adoptado: Boolean = false

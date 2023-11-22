@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.example.proyecto_tp3_kotlin.R
+import com.example.proyecto_tp3_kotlin.databinding.ItemRvPerroBinding
 
 class HomeFragment : Fragment() {
 
@@ -27,6 +30,7 @@ class HomeFragment : Fragment() {
     private lateinit var adaptador: AdaptadorPerro
     private var db: DogDataBase? = null
     private var dogDao: DogDao? = null
+    val favorito = arguments?.getBoolean("favorito") ?: false
 
     var listaPerro = arrayListOf<DogModel>()
 
@@ -39,6 +43,9 @@ class HomeFragment : Fragment() {
             llenarLista()
         }
         setupRecyclerView()
+
+
+
         return binding.root
     }
 
@@ -85,7 +92,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-    binding.rvLista.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvLista.layoutManager = LinearLayoutManager(requireContext())
         adaptador = AdaptadorPerro(listaPerro, object : OnPerroClickListener {
             override fun onPerroClick(perro: DogModel) {
                 val navController = findNavController()
@@ -95,25 +102,14 @@ class HomeFragment : Fragment() {
                 // Crear un bundle para pasar datos al fragmento
                 val bundle = Bundle()
                 bundle.putString("nombre", perro.name)
-                bundle.putString("ubicacion", perro.ubication)
-                bundle.putString("sexo", perro.gender)
-                bundle.putString("dueno", perro.owner)
-                bundle.putInt("edad", perro.age)
-                bundle.putInt("peso", perro.weight)
-                bundle.putInt("id", perro.id)
-                bundle.putBoolean("adoptado", perro.adoptado)
-                bundle.putString("imageUrl", perro.image)
-                bundle.putString("raza", perro.breed)
-                if (perro.subBreed.isEmpty()){
-                    bundle.putString("subRaza", "N/A")
-                }else{
-                    bundle.putString("subRaza", perro.subBreed)
-                }
-
+                // ... (resto del código)
 
                 navController.navigate(R.id.action_fragment_home_to_detalleFragment, bundle)
-                //navController.popBackStack(R.id.fragment_home, false)
+            }
 
+            override fun onPerroClickFavorito(perro: DogModel, favoritoButton: ImageButton) {
+                agregarFavorito(perro.id)
+                // Aquí puedes manejar la lógica específica del botón favorito si es necesario
             }
         })
 
@@ -129,6 +125,30 @@ class HomeFragment : Fragment() {
             }
         }
         adaptador.filtrar(listaFiltrada)
+    }
+
+    fun agregarFavorito(id: Int){
+        db = DogDataBase.getDatabase(binding.root.context)
+        dogDao = db?.dogDao()
+        lifecycleScope.launch(Dispatchers.IO) {
+            dogDao?.favorito(id)
+            activity?.runOnUiThread {
+                val action = DetalleFragmentDirections.actionDetalleFragmentToFragmentAdopcion()
+                findNavController().navigate(action)
+            }
+        }
+    }
+
+    private fun displayToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+    }
+    private fun validate(favorito: Boolean): Boolean{
+        println(favorito)
+        if(favorito == true){
+            displayToast("Este perro ya fue guardado!")
+            return false
+        }
+        return true
     }
 
 }
