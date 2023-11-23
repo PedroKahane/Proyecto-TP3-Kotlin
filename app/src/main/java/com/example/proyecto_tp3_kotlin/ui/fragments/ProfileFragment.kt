@@ -75,8 +75,8 @@ class ProfileFragment : Fragment() {
         if (file.exists()) {
             val bitmap = BitmapFactory.decodeFile(file.absolutePath)
             binding.imagenPerfil.setImageBitmap(bitmap)
-        }
+        }else{
         val defaultDrawable = ContextCompat.getDrawable(binding.root.context, R.drawable.profile)
-        binding.imagenPerfil.setImageDrawable(defaultDrawable)
+        binding.imagenPerfil.setImageDrawable(defaultDrawable)}
     }
 }
