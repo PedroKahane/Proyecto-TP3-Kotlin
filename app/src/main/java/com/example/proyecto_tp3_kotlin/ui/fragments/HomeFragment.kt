@@ -44,8 +44,6 @@ class HomeFragment : Fragment() {
         }
         setupRecyclerView()
 
-
-
         return binding.root
     }
 
