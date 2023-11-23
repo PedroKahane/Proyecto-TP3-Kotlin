@@ -1,6 +1,7 @@
 package com.example.proyecto_tp3_kotlin.ui.fragments
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -26,6 +27,11 @@ class ProfileFragment : Fragment() {
 
         val btnCamara = binding.btnCamara
         val nombrePerfil = binding.nombrePerfil
+
+        val sharedPreferences = requireActivity().getSharedPreferences("nombre_prefs", Context.MODE_PRIVATE)
+        val nombre = sharedPreferences.getString("nombre", "ValorPredeterminado")
+
+        nombrePerfil.setText(nombre)
 
         cargarImagen()
 

@@ -1,5 +1,6 @@
 package com.example.proyecto_tp3_kotlin.ui.views
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -30,6 +31,11 @@ class LoginActivity : AppCompatActivity() {
                 val nombre = binding.name.editableText.toString()
                 val bundle = Bundle()
                 bundle.putString("nombre", nombre)
+
+                val sharedPreferences = getSharedPreferences("nombre_prefs", Context.MODE_PRIVATE)
+                val editor = sharedPreferences.edit()
+                editor.putString("nombre", nombre)
+                editor.apply()
 
                 val intent = Intent(this, MainActivity::class.java);
                 startActivity(intent)
