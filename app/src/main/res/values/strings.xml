@@ -7,7 +7,7 @@
     <string name="peso">Peso</string>
     <string name="raza">Raza</string>
     <string name="sub_raza">Sub Raza</string>
-    <string name="dueño">Dueño</string>
+    <string name="dueño">Dueño: </string>
     <string name="adoptar">Adoptar</string>
     <string name="descripcionPerro">Imagen del perro</string>
     <string name="descipcionUbicacion">Simbolo ubicacion</string>

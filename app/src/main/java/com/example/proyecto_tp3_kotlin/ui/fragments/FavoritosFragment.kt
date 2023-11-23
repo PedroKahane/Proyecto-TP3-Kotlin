@@ -106,6 +106,7 @@ class FavoritosFragment : Fragment() {
                 bundle.putInt("peso", perro.weight)
                 bundle.putInt("id", perro.id)
                 bundle.putBoolean("adoptado", perro.adoptado)
+                bundle.putBoolean("favorito", perro.favorito)
                 bundle.putString("imageUrl", perro.image)
 
 

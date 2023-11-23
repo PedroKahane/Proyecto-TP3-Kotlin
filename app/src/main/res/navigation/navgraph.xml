@@ -79,5 +79,10 @@
         <action
             android:id="@+id/action_detalleFragment_to_fragment_adopcion"
             app:destination="@id/fragment_adopcion" />
+        <action
+            android:id="@+id/action_detalleFragment_self"
+            app:destination="@id/detalleFragment"
+            app:popUpTo="@+id/detalleFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

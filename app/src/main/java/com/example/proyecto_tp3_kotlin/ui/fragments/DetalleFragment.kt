@@ -26,7 +26,6 @@ class DetalleFragment : Fragment()
 {   lateinit var v : View
     private var db: DogDataBase? = null
     private var dogDao: DogDao? = null
-    private lateinit var adaptador: AdaptadorPerro
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,6 +44,7 @@ class DetalleFragment : Fragment()
         val subRaza = arguments?.getString("subRaza", "N/A")
         val id = arguments?.getInt("id") ?: 0
         val adoptado = arguments?.getBoolean("adoptado") ?: false
+        val favorito = arguments?.getBoolean("favorito") ?: false
         val imageUrl = arguments?.getString("imageUrl")
 
         // Configurar las vistas con los datos del perro
@@ -68,13 +68,23 @@ class DetalleFragment : Fragment()
                 Toast.makeText(requireContext(), "No se encontró una aplicación de llamadas", Toast.LENGTH_SHORT).show()
             }
         }
-
+        if(favorito){
+            v.findViewById<ImageButton>(R.id.favorito).setImageResource(R.drawable.guardado)
+        }
+        if(!favorito){
+            v.findViewById<ImageButton>(R.id.favorito).setImageResource(R.drawable.sin_guardar)
+        }
         v.findViewById<Button>(R.id.Adoptar).setOnClickListener() {
             if(validate(adoptado)) {
                 viewLifecycleOwner.lifecycleScope.launch {
                     adoptar(id)
 
                 }
+            }
+        }
+        v.findViewById<ImageButton>(R.id.favorito).setOnClickListener() {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    agregarFavorito(id, nombre, ubicacion, sexo, dueno, edad, peso, raza, subRaza, adoptado, favorito, imageUrl)
             }
         }
         return v
@@ -100,5 +110,34 @@ class DetalleFragment : Fragment()
             return false
         }
         return true
+    }
+    fun agregarFavorito(id: Int, nombre: String?, ubicacion: String?, sexo: String?, dueno: String?, edad: Int, peso: Int, raza: String?, subRaza: String?, adoptado: Boolean,favorito: Boolean, imageUrl: String?){
+        db = DogDataBase.getDatabase(v.context)
+        dogDao = db?.dogDao()
+        lifecycleScope.launch(Dispatchers.IO) {
+            dogDao?.favorito(id)
+            activity?.runOnUiThread {
+                val navController = findNavController()
+                // Crear un bundle para pasar datos al fragmento
+                val bundle = Bundle()
+                bundle.putString("nombre", nombre)
+                bundle.putString("ubicacion", ubicacion)
+                bundle.putString("sexo", sexo)
+                bundle.putString("dueno", dueno)
+                bundle.putString("raza", raza)
+                if(subRaza == null || subRaza == ""){
+                    bundle.putString("subRaza", "N/A")
+                } else {
+                    bundle.putString("subRaza", subRaza)
+                }
+                bundle.putInt("edad", edad)
+                bundle.putInt("peso", peso)
+                bundle.putInt("id", id)
+                bundle.putBoolean("adoptado", adoptado)
+                bundle.putBoolean("favorito", !favorito)
+                bundle.putString("imageUrl", imageUrl)
+                navController.navigate(R.id.action_detalleFragment_self, bundle)
+            }
+        }
     }
 }
