@@ -34,13 +34,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="365dp"
+            android:layout_margin="5dp"
             android:paddingLeft="20dp"
             android:paddingTop="20dp"
             android:paddingRight="20dp">
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
-                android:layout_width="371dp"
+                android:layout_width="0dp"
                 android:layout_height="83dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -48,11 +49,11 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
-                    android:layout_width="207dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:layout_gravity="start"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/Nombre"
@@ -100,12 +101,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="end"
+                    android:layout_weight="1"
                     android:orientation="vertical"
                     android:paddingLeft="20dp"
                     android:paddingTop="8dp"
                     android:paddingEnd="8dp"
-                    android:paddingRight="20dp"
-                    android:layout_weight="1">
+                    android:paddingRight="20dp">
 
                     <TextView
                         android:id="@+id/Edad"
@@ -139,7 +140,7 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout3"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="69dp"
                 android:layout_marginTop="28dp"
                 android:orientation="horizontal"
@@ -148,16 +149,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
                 <LinearLayout
-                    android:layout_width="158dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="left"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="75dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
                         android:orientation="vertical">
 
@@ -188,10 +191,13 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="75dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
@@ -222,7 +228,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="137dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="right|end"
                     android:layout_weight="1"
@@ -235,6 +241,8 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:gravity="right|end"
                         android:orientation="vertical">
 
                         <TextView
@@ -268,6 +276,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
@@ -308,7 +317,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"
                     android:layout_marginLeft="10dp"
@@ -341,11 +350,10 @@
 
                 <ImageButton
                     android:id="@+id/imageView4"
-                    android:layout_width="110dp"
+                    android:layout_width="55dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:layout_marginRight="15dp"
-                    android:layout_weight="1"
+                    android:layout_gravity="right|end"
+                    android:layout_marginRight="25dp"
                     android:adjustViewBounds="true"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/descripcionTelefono"
@@ -365,8 +373,8 @@
                 android:textFontWeight="600"
                 android:textSize="14sp"
                 android:textStyle="normal"
-                app:fontFamily="@font/poppins_font_family"
                 app:cornerRadius="10dp"
+                app:fontFamily="@font/poppins_font_family"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
