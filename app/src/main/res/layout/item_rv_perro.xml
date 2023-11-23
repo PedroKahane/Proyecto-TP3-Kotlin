@@ -3,55 +3,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="16dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginBottom="8dp"
-    android:background="#FFFFFF"
-    android:radius="16dp"
+    android:layout_margin="16dp"
     app:cardCornerRadius="16dp"
-    app:cardElevation="0dp"
+    app:cardElevation="4dp"
     app:cardUseCompatPadding="true"
     tools:ignore="UseCompoundDrawables">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="10dp">
+        android:background="@color/colorPrimary">
 
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/brandImagen"
-            android:layout_width="160dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
             android:contentDescription=""
             android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@drawable/custom_rounded_mask"
             tools:image="imagen" />
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/favorito"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:clickable="true"
-                android:contentDescription="Guardar en favoritos"
-                android:src="@drawable/sin_guardar" />
+            android:orientation="vertical"
+            android:layout_alignBottom="@id/brandImagen">
 
             <TextView
                 android:id="@+id/brandNombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginLeft="10dp"
                 android:textSize="13sp"
                 tools:text="nombre" />
 
@@ -59,8 +44,9 @@
                 android:id="@+id/brandEdad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginLeft="10dp"
                 android:textSize="13sp"
                 tools:text="edad" />
 
@@ -68,8 +54,9 @@
                 android:id="@+id/brandRaza"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginLeft="10dp"
                 android:textSize="13sp"
                 tools:text="raza" />
 
@@ -77,8 +64,9 @@
                 android:id="@+id/brandSubRaza"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginLeft="10dp"
                 android:textSize="13sp"
                 tools:text="subRaza" />
 
@@ -86,14 +74,24 @@
                 android:id="@+id/brandGenero"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginLeft="10dp"
                 android:textSize="13sp"
                 tools:text="genero" />
+
+            <ImageButton
+                android:id="@+id/favorito"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:clickable="true"
+                android:contentDescription="Guardar en favoritos"
+                android:src="@drawable/sin_guardar"
+                android:background="#40FFFFFF"/>
 
 
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
