@@ -10,10 +10,12 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.proyecto_tp3_kotlin.databinding.FragmentProfileBinding
 import java.io.File
 import java.io.FileOutputStream
+import com.example.proyecto_tp3_kotlin.R
 
 class ProfileFragment : Fragment() {
 
@@ -74,5 +76,7 @@ class ProfileFragment : Fragment() {
             val bitmap = BitmapFactory.decodeFile(file.absolutePath)
             binding.imagenPerfil.setImageBitmap(bitmap)
         }
+        val defaultDrawable = ContextCompat.getDrawable(binding.root.context, R.drawable.profile)
+        binding.imagenPerfil.setImageDrawable(defaultDrawable)
     }
 }

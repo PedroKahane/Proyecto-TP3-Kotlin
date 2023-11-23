@@ -1,8 +1,8 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_height="230dp"
     android:layout_margin="16dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="4dp"
@@ -11,14 +11,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/colorPrimary">
 
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/brandImagen"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="match_parent"
             android:contentDescription=""
             android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@drawable/custom_rounded_mask"
@@ -26,68 +26,80 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@id/brandImagen"
+            android:background="#70000000"
             android:orientation="vertical"
-            android:layout_alignBottom="@id/brandImagen">
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/brandNombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:textColor="@color/white"
                 android:textSize="13sp"
+                android:textStyle="bold"
                 tools:text="nombre" />
 
             <TextView
                 android:id="@+id/brandEdad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:textColor="@color/white"
                 android:textSize="13sp"
+                android:textStyle="bold"
                 tools:text="edad" />
 
             <TextView
                 android:id="@+id/brandRaza"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:textColor="@color/white"
                 android:textSize="13sp"
+                android:textStyle="bold"
                 tools:text="raza" />
 
             <TextView
                 android:id="@+id/brandSubRaza"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:textColor="@color/white"
                 android:textSize="13sp"
+                android:textStyle="bold"
                 tools:text="subRaza" />
 
             <TextView
                 android:id="@+id/brandGenero"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:textColor="@color/white"
                 android:textSize="13sp"
+                android:textStyle="bold"
                 tools:text="genero" />
 
             <ImageButton
                 android:id="@+id/favorito"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="43dp"
+                android:background="#40FFFFFF"
                 android:clickable="true"
                 android:contentDescription="Guardar en favoritos"
-                android:src="@drawable/sin_guardar"
-                android:background="#40FFFFFF"/>
+                android:src="@drawable/sin_guardar" />
 
 
         </LinearLayout>
