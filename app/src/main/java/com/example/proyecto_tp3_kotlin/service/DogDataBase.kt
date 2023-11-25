@@ -37,10 +37,25 @@ abstract class DogDataBase: RoomDatabase() {
                     .addCallback(roomCallback)
                     .fallbackToDestructiveMigration()
                     .build()
-                INSTANCE = instance
                 initializeDatabase(instance)
+
+
+                INSTANCE = instance
                 return instance
             }
+        }
+        fun insertDatabase(context: Context) {
+            val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    DogDataBase::class.java,
+                    "Dog_database"
+                )
+                    .addCallback(roomCallback)
+                    .fallbackToDestructiveMigration()
+                    .build()
+            initializeDatabase(instance)
+            INSTANCE = instance
+
         }
         private fun initializeDatabase(database: DogDataBase) {
             // Utilizar una coroutine para llenar la base de datos en un hilo secundario
@@ -48,7 +63,6 @@ abstract class DogDataBase: RoomDatabase() {
                 // Lógica para llenar la base de datos con perros iniciales
                 val dogDao = database.dogDao()
                 // Insertar perros iniciales
-                //dogDao.borrarTodosLosPerros()
                 if (dogDao.getAll().isEmpty()) {
                     val initialDogs = listOf(
                         DogModel(

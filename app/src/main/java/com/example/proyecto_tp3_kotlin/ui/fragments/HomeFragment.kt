@@ -27,7 +27,7 @@ import com.example.proyecto_tp3_kotlin.databinding.ItemRvPerroBinding
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var adaptador: AdaptadorPerro
+    private var adaptador: AdaptadorPerro? = null
     private var db: DogDataBase? = null
     private var dogDao: DogDao? = null
     val favorito = arguments?.getBoolean("favorito") ?: false
@@ -39,10 +39,12 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+
         lifecycleScope.launch {
             llenarLista()
+            setupRecyclerView()
         }
-        setupRecyclerView()
+
 
         return binding.root
     }
@@ -67,29 +69,28 @@ class HomeFragment : Fragment() {
     }
 
     suspend fun llenarLista() = withContext(Dispatchers.IO) {
-
         db = DogDataBase.getDatabase(binding.root.context)
+
+
         dogDao = db?.dogDao()
 
         // Obtener la lista de perros después de la inserción
         val perros: List<DogModel>? = dogDao?.getAll()
 
         // Imprimir la lista de perros en la consola (puedes comentar o eliminar esta línea si no es necesario)
-        println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Lista de perros: $perros")
+        //println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Lista de perros: $perros")
 
         // Actualizar la lista en el hilo principal
         withContext(Dispatchers.Main) {
             listaPerro.clear()
             if (perros != null) {
                 listaPerro.addAll(perros)
-                adaptador.notifyDataSetChanged()
-                setupRecyclerView()
             }
-
         }
     }
 
     private fun setupRecyclerView() {
+        println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Lista de perros: $listaPerro")
         binding.rvLista.layoutManager = LinearLayoutManager(requireContext())
         adaptador = AdaptadorPerro(listaPerro, object : OnPerroClickListener {
             override fun onPerroClick(perro: DogModel) {
@@ -136,7 +137,7 @@ class HomeFragment : Fragment() {
                 listaFiltrada.add(it)
             }
         }
-        adaptador.filtrar(listaFiltrada)
+        adaptador?.filtrar(listaFiltrada)
     }
 
     fun agregarFavorito(id: Int){
@@ -145,7 +146,7 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.IO) {
             dogDao?.favorito(id)
             activity?.runOnUiThread {
-                adaptador.notifyDataSetChanged()
+                adaptador?.notifyDataSetChanged()
                 val action = HomeFragmentDirections.actionFragmentHomeToFragmentFavoritos()
                 findNavController().navigate(action)
             }

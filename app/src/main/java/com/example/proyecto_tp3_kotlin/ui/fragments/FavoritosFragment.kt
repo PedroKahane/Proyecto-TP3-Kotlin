@@ -84,43 +84,59 @@ class FavoritosFragment : Fragment() {
     }
     private fun setupRecyclerView() {
         binding.rvLista.layoutManager = LinearLayoutManager(requireContext())
-        adaptador = AdaptadorPerro(listaPerro, object : OnPerroClickListener {
-            override fun onPerroClick(perro: DogModel) {
-                val navController = findNavController()
+        if(listaPerro.isEmpty()){
+            binding.rvLista.visibility = View.GONE
+            binding.noFavs.visibility = View.VISIBLE
+            adaptador = AdaptadorPerro(listaPerro, object : OnPerroClickListener {
+                override fun onPerroClick(perro: DogModel) {
 
-                println("Perro seleccionado: ${perro.name}, Raza: ${perro.breed}, Edad: ${perro.age}")
-
-                // Crear un bundle para pasar datos al fragmento
-                val bundle = Bundle()
-                bundle.putString("nombre", perro.name)
-                bundle.putString("ubicacion", perro.ubication)
-                bundle.putString("sexo", perro.gender)
-                bundle.putString("dueno", perro.owner)
-                bundle.putString("raza", perro.breed)
-                if(perro.subBreed == null || perro.subBreed == ""){
-                    bundle.putString("subRaza", "N/A")
-                } else {
-                    bundle.putString("subRaza", perro.subBreed)
                 }
-                bundle.putInt("edad", perro.age)
-                bundle.putInt("peso", perro.weight)
-                bundle.putInt("id", perro.id)
-                bundle.putBoolean("adoptado", perro.adoptado)
-                bundle.putBoolean("favorito", perro.favorito)
-                bundle.putString("imageUrl", perro.image)
+                override fun onPerroClickFavorito(perro: DogModel, favoritoButton: ImageButton) {
+                }
+            })
+        } else {
+            binding.rvLista.visibility = View.VISIBLE
+            binding.noFavs.visibility = View.GONE
+            adaptador = AdaptadorPerro(listaPerro, object : OnPerroClickListener {
+                override fun onPerroClick(perro: DogModel) {
+                    val navController = findNavController()
+
+                    println("Perro seleccionado: ${perro.name}, Raza: ${perro.breed}, Edad: ${perro.age}")
+
+                    // Crear un bundle para pasar datos al fragmento
+                    val bundle = Bundle()
+                    bundle.putString("nombre", perro.name)
+                    bundle.putString("ubicacion", perro.ubication)
+                    bundle.putString("sexo", perro.gender)
+                    bundle.putString("dueno", perro.owner)
+                    bundle.putString("raza", perro.breed)
+                    if(perro.subBreed == null || perro.subBreed == ""){
+                        bundle.putString("subRaza", "N/A")
+                    } else {
+                        bundle.putString("subRaza", perro.subBreed)
+                    }
+                    bundle.putInt("edad", perro.age)
+                    bundle.putInt("peso", perro.weight)
+                    bundle.putInt("id", perro.id)
+                    bundle.putBoolean("adoptado", perro.adoptado)
+                    bundle.putBoolean("favorito", perro.favorito)
+                    bundle.putString("imageUrl", perro.image)
 
 
 
-                navController.navigate(R.id.action_fragment_favoritos_to_detalleFragment, bundle)
-                //navController.popBackStack(R.id.fragment_home, false)
+                    navController.navigate(R.id.action_fragment_favoritos_to_detalleFragment, bundle)
+                    //navController.popBackStack(R.id.fragment_home, false)
 
-            }
-            override fun onPerroClickFavorito(perro: DogModel, favoritoButton: ImageButton) {
-                agregarFavorito(perro.id)
-                // Aquí puedes manejar la lógica específica del botón favorito si es necesario
-            }
-        })
-        binding.rvLista.adapter = adaptador
+                }
+                override fun onPerroClickFavorito(perro: DogModel, favoritoButton: ImageButton) {
+                    agregarFavorito(perro.id)
+                    // Aquí puedes manejar la lógica específica del botón favorito si es necesario
+                }
+            })
+            binding.rvLista.adapter = adaptador
+
+        }
+
     }
     fun filtrar(texto: String){
         var listaFiltrada = arrayListOf<DogModel>()

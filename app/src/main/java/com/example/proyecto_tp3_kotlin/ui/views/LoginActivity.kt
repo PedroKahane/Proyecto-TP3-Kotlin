@@ -13,6 +13,7 @@ import com.example.proyecto_tp3_kotlin.R
 import com.example.proyecto_tp3_kotlin.databinding.ActivityLoginBinding
 import com.example.proyecto_tp3_kotlin.databinding.ActivityMainBinding
 import com.example.proyecto_tp3_kotlin.preferences.AppPreferences
+import com.example.proyecto_tp3_kotlin.service.DogDataBase
 import com.example.proyecto_tp3_kotlin.ui.fragments.ProfileFragment
 import com.example.proyecto_tp3_kotlin.viewmodels.SharedViewModel
 
@@ -23,6 +24,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        DogDataBase.insertDatabase(binding.root.context)
 
         var buttonLogin = findViewById<Button>(R.id.button_login)
 

@@ -89,7 +89,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/darker_grey"
                             android:textFontWeight="400"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:textStyle="normal"
                             app:fontFamily="@font/poppins_semi_bold"
                             tools:text="Ubicacion" />
@@ -171,7 +171,7 @@
                             android:textAlignment="center"
                             android:textColor="@color/colorPrimary"
                             android:textFontWeight="500"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:textStyle="normal"
                             app:fontFamily="@font/poppins_semi_bold"
                             tools:text="Male" />
@@ -184,7 +184,7 @@
                             android:textAlignment="center"
                             android:textColor="@color/colorPrimary"
                             android:textFontWeight="400"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="normal"
                             app:fontFamily="@font/poppins_regular" />
 
@@ -207,7 +207,7 @@
                             android:textAlignment="center"
                             android:textColor="@color/colorPrimary"
                             android:textFontWeight="500"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:textStyle="normal"
                             app:fontFamily="@font/poppins_semi_bold"
                             tools:text="2Kg" />
@@ -220,7 +220,7 @@
                             android:textAlignment="center"
                             android:textColor="@color/colorPrimary"
                             android:textFontWeight="400"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="normal"
                             app:fontFamily="@font/poppins_regular" />
                     </LinearLayout>
@@ -252,7 +252,7 @@
                             android:textAlignment="center"
                             android:textColor="@color/colorPrimary"
                             android:textFontWeight="500"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:textStyle="normal"
                             app:fontFamily="@font/poppins_semi_bold"
                             tools:text="poodle" />
@@ -264,7 +264,7 @@
                             android:textAlignment="center"
                             android:textColor="@color/colorPrimary"
                             android:textFontWeight="400"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="normal"
                             app:fontFamily="@font/poppins_regular" />
                     </LinearLayout>
@@ -286,7 +286,7 @@
                             android:textAlignment="center"
                             android:textColor="@color/colorPrimary"
                             android:textFontWeight="500"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:textStyle="normal"
                             app:fontFamily="@font/poppins_semi_bold"
                             tools:text="toy" />
@@ -298,7 +298,7 @@
                             android:textAlignment="center"
                             android:textColor="@color/colorPrimary"
                             android:textFontWeight="400"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="normal"
                             app:fontFamily="@font/poppins_regular" />
                     </LinearLayout>
