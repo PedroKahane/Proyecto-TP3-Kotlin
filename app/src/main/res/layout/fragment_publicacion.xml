@@ -137,6 +137,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/DogSubBreed" />
 
+        <EditText
+            android:id="@+id/OwnerPhone"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+
+            android:hint="Owner Phone"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/OwnerDetails" />
+
         <Button
             android:id="@+id/publicarBoton"
             android:layout_width="match_parent"
@@ -150,7 +166,7 @@
             android:textColorHint="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/OwnerDetails" />
+            app:layout_constraintTop_toBottomOf="@id/OwnerPhone" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
