@@ -41,7 +41,7 @@ class PublicacionFragment : Fragment(
     lateinit var dogBreed : Spinner
     lateinit var dogSubBreed : Spinner
     lateinit var ownerDetails : EditText
-    lateinit var ownerPhone : EditText
+
     private lateinit var remote: DogService
     private var db: DogDataBase? = null
     private var dogDao: DogDao? = null
@@ -81,7 +81,7 @@ class PublicacionFragment : Fragment(
 
 
         ownerDetails = v.findViewById(R.id.OwnerDetails)
-        ownerPhone =   v.findViewById(R.id.OwnerPhone)
+
 
         publicarBoton = v.findViewById(R.id.publicarBoton)
 
@@ -95,7 +95,6 @@ class PublicacionFragment : Fragment(
                 breed = dogBreed.toString(),
                 subBreed = dogSubBreed.toString(),
                 owner = "propietario",
-                ownerPhone = "12121212",
                 ubication = "Ubicación del perro"
             )
             dogdao.instertAll(dog)
@@ -113,7 +112,7 @@ class PublicacionFragment : Fragment(
             loadBreeds()
         }
         v.findViewById<Button>(R.id.publicarBoton).setOnClickListener() {
-            if(validateInputData(dogBreed.selectedItem.toString(),selectedItemSpinnerSubBreed,dogGender.selectedItem.toString(),dogName.text.toString(), dogAge.text.toString(), dogWeight.text.toString(), ownerDetails.text.toString(), ownerPhone.text.toString())) {
+            if(validateInputData(dogBreed.selectedItem.toString(),selectedItemSpinnerSubBreed,dogGender.selectedItem.toString(),dogName.text.toString(), dogAge.text.toString(), dogWeight.text.toString(), ownerDetails.text.toString())) {
                 viewLifecycleOwner.lifecycleScope.launch {
                     insertDataToDatabase()
 
@@ -137,7 +136,7 @@ class PublicacionFragment : Fragment(
         val gender = dogGender.selectedItem.toString()
         val weight = dogWeight.text.toString()
         val owner = ownerDetails.text.toString()
-        val ownerPhone = ownerPhone.text.toString()
+
 
         println(gender)
         println(breed)
@@ -149,7 +148,7 @@ class PublicacionFragment : Fragment(
             imagen = dogRepository.getImageBreed(breed)
         }
 
-        val dog = DogModel(i, imagen, name, Integer.parseInt(age), gender, Integer.parseInt(weight), breed, subBreed, owner, ownerPhone, "Argentina")
+        val dog = DogModel(i, imagen, name, Integer.parseInt(age), gender, Integer.parseInt(weight), breed, subBreed, owner, "Argentina")
         println(dog)
         lifecycleScope.launch(Dispatchers.IO) {
             dogDao?.instertAll(dog)
@@ -235,7 +234,7 @@ class PublicacionFragment : Fragment(
         age: String,
         weight: String,
         details: String,
-        ownerPhone: String
+
     ): Boolean{
         val regex = Regex("^[0-9]*\$")
         if (!regex.matches(age)) {
@@ -280,10 +279,7 @@ class PublicacionFragment : Fragment(
             displayToast("Ingrese el peso, por favor!")
             return false
         }
-        if (!regex.matches(ownerPhone)) {
-            displayToast("El telefono debe ser un numero!")
-            return false
-        }
+
         return true
     }
     private fun displayToast(message: String) {

@@ -71,7 +71,7 @@ abstract class DogDataBase: RoomDatabase() {
                             gender = "Macho",
                             weight = 8,
                             owner = "Oscar",
-                            ownerPhone = "11111111",
+
                             ubication = "Buenos Aires",
                             favorito = false,
                             adoptado = true,
@@ -85,7 +85,7 @@ abstract class DogDataBase: RoomDatabase() {
                             gender = "Hembra",
                             weight = 18,
                             owner = "Juan",
-                            ownerPhone = "10101010",
+
                             ubication = "Buenos Aires",
                             favorito = false,
                             adoptado = true,
@@ -99,7 +99,7 @@ abstract class DogDataBase: RoomDatabase() {
                             gender = "Hembra",
                             weight = 20,
                             owner = "Ramiro",
-                            ownerPhone = "22222222",
+
                             ubication = "Buenos Aires",
                             favorito = false,
                             adoptado = false,
@@ -113,7 +113,7 @@ abstract class DogDataBase: RoomDatabase() {
                             gender = "Macho",
                             weight = 12,
                             owner = "Santiago",
-                            ownerPhone = "33333333",
+
                             ubication = "Buenos Aires",
                             favorito = false,
                             adoptado = false,
@@ -127,7 +127,7 @@ abstract class DogDataBase: RoomDatabase() {
                             gender = "Macho",
                             weight = 30,
                             owner = "Sofia",
-                            ownerPhone = "44444444",
+
                             ubication = "Buenos Aires",
                             favorito = false,
                             adoptado = true,
@@ -141,7 +141,7 @@ abstract class DogDataBase: RoomDatabase() {
                             gender = "Macho",
                             weight = 15,
                             owner = "Juan",
-                            ownerPhone = "55555555",
+
                             ubication = "Buenos Aires",
                             favorito = false,
                             adoptado = false,
@@ -155,7 +155,7 @@ abstract class DogDataBase: RoomDatabase() {
                             gender = "Macho",
                             weight = 25,
                             owner = "Delfina",
-                            ownerPhone = "66666666",
+
                             ubication = "Buenos Aires",
                             favorito = true,
                             adoptado = false,
@@ -169,7 +169,7 @@ abstract class DogDataBase: RoomDatabase() {
                             gender = "Hembra",
                             weight = 22,
                             owner = "Juana",
-                            ownerPhone = "77777777",
+
                             ubication = "Buenos Aires",
                             favorito = false,
                             adoptado = false,
@@ -183,7 +183,7 @@ abstract class DogDataBase: RoomDatabase() {
                             gender = "Hembra",
                             weight = 9,
                             owner = "Luana",
-                            ownerPhone = "88888888",
+
                             ubication = "Buenos Aires",
                             favorito = true,
                             adoptado = false,
@@ -197,7 +197,7 @@ abstract class DogDataBase: RoomDatabase() {
                             gender = "Hembra",
                             weight = 24,
                             owner = "Franco",
-                            ownerPhone = "99999999",
+
                             ubication = "Buenos Aires",
                             favorito = false,
                             adoptado = false,
@@ -211,7 +211,7 @@ abstract class DogDataBase: RoomDatabase() {
                             gender = "Macho",
                             weight = 11,
                             owner = "Luciana",
-                            ownerPhone = "00000000",
+
                             ubication = "Buenos Aires",
                             favorito = false,
                             adoptado = false,

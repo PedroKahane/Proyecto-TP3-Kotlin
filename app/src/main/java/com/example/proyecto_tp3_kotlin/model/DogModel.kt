@@ -35,8 +35,7 @@ class DogModel(
     @ColumnInfo(name = "owner")
     val owner: String,
 
-    @ColumnInfo(name = "ownerPhone")
-    val ownerPhone: String,
+
 
     @ColumnInfo(name = "ubication")
     val ubication: String,
@@ -49,7 +48,7 @@ class DogModel(
 
 ){
     override fun toString(): String {
-        return "DogModel(name=$name, breed=$breed, subBreed=$subBreed, owner=$owner, ownerPhone=$ownerPhone, ...)"
+        return "DogModel(name=$name, breed=$breed, subBreed=$subBreed, owner=$owner, ...)"
     }
 }
 
