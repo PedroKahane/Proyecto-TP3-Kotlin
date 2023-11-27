@@ -181,7 +181,7 @@ class PublicacionFragment : Fragment(
             dogBreed.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
-                    // Aquí puedes realizar acciones cuando se selecciona un elemento del Spinner
+
                     val selectedRaza = breedsConSeleccion[position]
                     val subrazas = subBreeds[selectedRaza]
 
@@ -202,7 +202,7 @@ class PublicacionFragment : Fragment(
 
                             }
                             override fun onNothingSelected(parent: AdapterView<*>?) {
-                                // Se llama cuando no se selecciona ningún elemento
+
                             }
                         }
 
@@ -215,14 +215,14 @@ class PublicacionFragment : Fragment(
 
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    // Se llama cuando no se selecciona ningún elemento
+
                 }
             }
 
 
 
         } catch (e: Exception) {
-            // Manejar excepción aquí
+
             Log.e("Example", e.stackTraceToString())
         }
     }

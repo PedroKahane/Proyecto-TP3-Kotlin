@@ -65,13 +65,9 @@ class FavoritosFragment : Fragment() {
         db = DogDataBase.getDatabase(binding.root.context)
         dogDao = db?.dogDao()
 
-        // Obtener la lista de perros después de la inserción
+
         val perros: List<DogModel>? = dogDao?.getFavorites()
 
-        // Imprimir la lista de perros en la consola (puedes comentar o eliminar esta línea si no es necesario)
-        println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Lista de perros: $perros")
-
-        // Actualizar la lista en el hilo principal
         withContext(Dispatchers.Main) {
             listaPerro.clear()
             if (perros != null) {
@@ -101,9 +97,6 @@ class FavoritosFragment : Fragment() {
                 override fun onPerroClick(perro: DogModel) {
                     val navController = findNavController()
 
-                    println("Perro seleccionado: ${perro.name}, Raza: ${perro.breed}, Edad: ${perro.age}")
-
-                    // Crear un bundle para pasar datos al fragmento
                     val bundle = Bundle()
                     bundle.putString("nombre", perro.name)
                     bundle.putString("ubicacion", perro.ubication)
@@ -125,12 +118,11 @@ class FavoritosFragment : Fragment() {
 
 
                     navController.navigate(R.id.action_fragment_favoritos_to_detalleFragment, bundle)
-                    //navController.popBackStack(R.id.fragment_home, false)
 
                 }
                 override fun onPerroClickFavorito(perro: DogModel, favoritoButton: ImageButton) {
                     agregarFavorito(perro.id)
-                    // Aquí puedes manejar la lógica específica del botón favorito si es necesario
+
                 }
             })
             binding.rvLista.adapter = adaptador

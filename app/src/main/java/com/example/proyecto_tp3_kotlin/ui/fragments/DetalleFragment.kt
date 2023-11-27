@@ -30,10 +30,10 @@ class DetalleFragment : Fragment()
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         v = inflater.inflate(R.layout.fragment_detalle, container, false)
 
-        // Obtener datos del perro de los argumentos
+
         val nombre = arguments?.getString("nombre")
         val ubicacion = arguments?.getString("ubicacion")
         val sexo = arguments?.getString("sexo")
@@ -47,7 +47,7 @@ class DetalleFragment : Fragment()
         val favorito = arguments?.getBoolean("favorito") ?: false
         val imageUrl = arguments?.getString("imageUrl")
 
-        // Configurar las vistas con los datos del perro
+
         v.findViewById<TextView>(R.id.Nombre).text = nombre
         v.findViewById<TextView>(R.id.Ubicacion).text = ubicacion
         v.findViewById<TextView>(R.id.NombreDelDueño).text = dueno
@@ -64,7 +64,7 @@ class DetalleFragment : Fragment()
             if (intent.resolveActivity(requireActivity().packageManager) != null) {
                 startActivity(intent)
             } else {
-                // Manejar el caso en el que no hay aplicación de llamadas disponible
+
                 Toast.makeText(requireContext(), "No se encontró una aplicación de llamadas", Toast.LENGTH_SHORT).show()
             }
         }
@@ -118,7 +118,7 @@ class DetalleFragment : Fragment()
             dogDao?.favorito(id)
             activity?.runOnUiThread {
                 val navController = findNavController()
-                // Crear un bundle para pasar datos al fragmento
+
                 val bundle = Bundle()
                 bundle.putString("nombre", nombre)
                 bundle.putString("ubicacion", ubicacion)

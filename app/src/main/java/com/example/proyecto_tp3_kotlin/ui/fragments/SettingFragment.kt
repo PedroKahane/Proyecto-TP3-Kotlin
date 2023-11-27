@@ -29,7 +29,7 @@ class SettingFragment : Fragment() {
 
 
         switchCompat.setOnCheckedChangeListener { _, isChecked ->
-            // Cambia el estado del modo oscuro en AppPreferences cuando se cambia el SwitchCompat
+
             appPreferences.setDarkModeEnabled(isChecked)
         }
         return  view

@@ -83,7 +83,6 @@ class MainActivity : AppCompatActivity() {
                 AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
             }
 
-            // Guardar el valor en SharedPreferences
             appPreferences.setDarkModeEnabled(isDarkMode)
         })
     }
